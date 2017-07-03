@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Weapon : MonoBehaviour
+public class Weapon : Photon.PunBehaviour
 {
 	public float fireRate = 0f;
 	public float Damage = 10f;
@@ -17,7 +17,7 @@ public class Weapon : MonoBehaviour
 	// Use this for initialization
 	void Awake ()
 	{
-		this.firePoint = transform.Find ("Fire Point");
+        this.firePoint = gameObject.transform.GetChild(3).GetChild(0).GetChild(0);/*transform.Find ("Fire Point");*/
 		if (this.firePoint == null) {
 			Debug.LogError ("No Fire Point?  WHAT?!");
 		}
@@ -26,7 +26,11 @@ public class Weapon : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (this.fireRate == 0) {
+        if (!photonView.isMine)
+        {
+            return;
+        }
+        if (this.fireRate == 0) {
 			if (Input.GetButtonDown ("Fire1")) {
 				this.Shoot ();
 			}
@@ -40,6 +44,8 @@ public class Weapon : MonoBehaviour
 
 	void Shoot ()
 	{
+        GameObject enemy;
+        PlayerScript playerSC;
 		Vector2 screenToWorldPoint = Camera.main.ScreenToWorldPoint (Input.mousePosition);
 		Vector2 mousePosition = new Vector2 (screenToWorldPoint.x, screenToWorldPoint.y);
 		Vector2 firePointPosition = new Vector2 (firePoint.position.x, firePoint.position.y);
@@ -52,6 +58,17 @@ public class Weapon : MonoBehaviour
 		if (hit.collider != null) {
 			Debug.DrawLine (firePointPosition, hit.point, Color.red);
 			Debug.Log ("We hit " + hit.collider.name + " and did " + this.Damage + " damage.");
+            if(hit.collider.tag == "Player")
+            {
+                enemy = hit.collider.gameObject;
+                playerSC = enemy.GetComponent<PlayerScript>();
+                playerSC.Health -= Damage;
+                Debug.Log(playerSC.Health);
+                if(playerSC.Health <= 0f)
+                {
+                    Debug.Log("Enemy is Dead");
+                }
+            }
 		}
 	}
 
