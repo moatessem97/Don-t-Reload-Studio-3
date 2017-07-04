@@ -38,14 +38,11 @@ GameObject:
   - component: {fileID: 58274287795280938}
   - component: {fileID: 50273614519479222}
   - component: {fileID: 114103361036237894}
-  - component: {fileID: 114972206185029784}
   - component: {fileID: 61204570430271910}
-  - component: {fileID: 114379834300330956}
   - component: {fileID: 114130828212242656}
   - component: {fileID: 114776490828533168}
   - component: {fileID: 114919622899264900}
-  - component: {fileID: 114286536908785904}
-  - component: {fileID: 114756937204514812}
+  - component: {fileID: 114972206185029784}
   - component: {fileID: 114246242463809392}
   m_Layer: 8
   m_Name: Player2Done
@@ -165,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1179540636683436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalPosition: {x: 14.7129, y: 4.314527, z: 0}
   m_LocalScale: {x: 1.7715329, y: 1.7715304, z: 1}
   m_Children:
   - {fileID: 4447623342924140}
@@ -348,9 +345,6 @@ MonoBehaviour:
   - {fileID: 114919622899264900}
   - {fileID: 50273614519479222}
   - {fileID: 114972206185029784}
-  - {fileID: 114756937204514812}
-  - {fileID: 114286536908785904}
-  - {fileID: 114246242463809392}
   ObservedComponentsFoldoutOpen: 1
   viewIdField: 0
   instantiationId: -1
@@ -372,49 +366,6 @@ MonoBehaviour:
   lookAheadFactor: 1.5
   lookAheadReturnSpeed: 0.5
   lookAheadMoveThreshold: 0.1
---- !u!114 &114286536908785904
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1179540636683436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6252fa5aec4884782990159795d36df2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fireRate: 5
-  Damage: 10
-  whatToHit:
-    serializedVersion: 2
-    m_Bits: 4294967291
-  BulletTrailPrefab: {fileID: 422280, guid: ff6d998de2a4b4a58ba2b4dfe924e7a3, type: 2}
-  effectSpawnRate: 10
-  MuzzleFlashPrefab: {fileID: 409904, guid: 3039ed71d59d74128b0544b37dd8d672, type: 2}
---- !u!114 &114379834300330956
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1179540636683436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8d293e18105dd84693afa021afb9a30, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Health: 100
---- !u!114 &114756937204514812
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1179540636683436}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e779290d67fd54fd18a6bf6df8235387, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rotationOffset: 0
 --- !u!114 &114776490828533168
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -520,6 +471,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d7b34a3bb2d4e4b926e7e729d3d410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotationOffset: 0
+  fireRate: 5
+  Damage: 10
+  whatToHit:
+    serializedVersion: 2
+    m_Bits: 4294966779
+  BulletTrailPrefab: {fileID: 422280, guid: ff6d998de2a4b4a58ba2b4dfe924e7a3, type: 2}
+  effectSpawnRate: 10
+  MuzzleFlashPrefab: {fileID: 409904, guid: 3039ed71d59d74128b0544b37dd8d672, type: 2}
+  Health: 300
+  Ammo: 0
 --- !u!212 &212243557507627944
 SpriteRenderer:
   m_ObjectHideFlags: 1

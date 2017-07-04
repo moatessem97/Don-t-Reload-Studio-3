@@ -1,19 +1,46 @@
 using System;
 using UnityEngine;
 using UnityStandardAssets.CrossPlatformInput;
+using Photon;
 
 namespace UnityStandardAssets._2D
 {
     [RequireComponent(typeof(PlatformerCharacter2D))]
-    public class Platformer2DUserControl : Photon.PunBehaviour
+    public class Platformer2DUserControl : PunBehaviour
     {
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
 
+        // Arm rotation Stuff
+        public int rotationOffset = 90;
+        private GameObject arm;
+
+        //Weapon Stuff
+        public float fireRate = 0f;
+        public float Damage = 10f;
+        public LayerMask whatToHit;
+        public Transform BulletTrailPrefab;
+        public float effectSpawnRate = 10f;
+        public Transform MuzzleFlashPrefab;
+
+        private float timeToFire = 0;
+        private Transform firePoint;
+        private float timeToSpawnEffect = 0f;
+
+        [SerializeField]
+        private int Health, Ammo;
 
         private void Awake()
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
+            //Getting the Arm
+            arm = gameObject.transform.GetChild(3).gameObject;
+            //Getting the Firepoint
+            this.firePoint = gameObject.transform.GetChild(3).GetChild(0).GetChild(0);/*transform.Find ("Fire Point");*/
+            if (this.firePoint == null)
+            {
+                Debug.LogError("No Fire Point?  WHAT?!");
+            }
         }
 
 
@@ -28,6 +55,9 @@ namespace UnityStandardAssets._2D
                 // Read the jump input in Update so button presses aren't missed.
                 m_Jump = CrossPlatformInputManager.GetButtonDown("Jump");
             }
+            ArmRotation();
+            Weapon();
+
         }
 
 
@@ -45,19 +75,95 @@ namespace UnityStandardAssets._2D
             m_Jump = false;
         }
 
+        private void ArmRotation()
+        {
+            // subtracting the position of the player from the mouse position
+            Vector3 difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+            difference.Normalize(); // normalizing the vector.  Meaning that all sums of the vector will be equal to 1.
+
+            float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;   // find the angle in degrees
+            arm.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + this.rotationOffset);
+        }
+
+        // All the weapon Related stuff
+
+        private void Weapon()
+        {
+            if (this.fireRate == 0)
+            {
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    this.Shoot();
+                }
+            }
+            else
+            {
+                if (Input.GetButton("Fire1") && Time.time > this.timeToFire)
+                {
+                    this.timeToFire = Time.time + 1 / this.fireRate;
+                    this.Shoot();
+                }
+            }
+        }
+
+        private void Shoot()
+        {
+            GameObject enemy;
+            PlayerScript playerSC;
+            Vector2 screenToWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 mousePosition = new Vector2(screenToWorldPoint.x, screenToWorldPoint.y);
+            Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
+            RaycastHit2D hit = Physics2D.Raycast(firePointPosition, mousePosition - firePointPosition, 100, whatToHit);
+            if (Time.time >= this.timeToSpawnEffect)
+            {
+                this.Effect();
+                this.timeToSpawnEffect = Time.time + 1 / this.effectSpawnRate;
+            }
+            Debug.DrawLine(firePointPosition, (mousePosition - firePointPosition) * 100, Color.cyan);
+            if (hit.collider != null)
+            {
+                Debug.DrawLine(firePointPosition, hit.point, Color.red);
+                Debug.Log("We hit " + hit.collider.name + " and did " + this.Damage + " damage.");
+                if (hit.collider.tag == "Player")
+                {
+                    enemy = hit.collider.gameObject;
+                    playerSC = enemy.GetComponent<PlayerScript>();
+                    playerSC.Health -= Damage;
+                    Debug.Log(playerSC.Health);
+                    if (playerSC.Health <= 0f)
+                    {
+                        Debug.Log("Enemy is Dead");
+                    }
+                }
+            }
+        }
+
+       private void Effect()
+        {
+            Instantiate(this.BulletTrailPrefab, this.firePoint.position, firePoint.rotation);
+            Transform clone = (Transform)Instantiate(this.MuzzleFlashPrefab, this.firePoint.position, firePoint.rotation);
+            clone.parent = this.firePoint;
+            float size = UnityEngine.Random.Range(0.6f, 0.9f);
+            clone.localScale = new Vector3(size, size, size);
+            Destroy(clone.gameObject, 0.02f);
+        }
+
+
+
         void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
             if (stream.isWriting)
             {
                 //// We own this player: send the others our data
-                //stream.SendNext(IsFiring);
-                //stream.SendNext(Health);
+                stream.SendNext(Health);
+                stream.SendNext(Ammo);
             }
             else
             {
                 //// Network player, receive data
                 //this.IsFiring = (bool)stream.ReceiveNext();
-                //this.Health = (float)stream.ReceiveNext();
+                this.Health = (int)stream.ReceiveNext();
+                this.Ammo = (int)stream.ReceiveNext();
             }
         }
     }

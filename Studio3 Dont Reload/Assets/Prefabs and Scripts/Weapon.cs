@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Photon;
 
-public class Weapon : Photon.PunBehaviour
+public class Weapon : PunBehaviour
 {
 	public float fireRate = 0f;
 	public float Damage = 10f;
