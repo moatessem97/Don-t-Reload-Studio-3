@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Photon;
 
 namespace UnityStandardAssets._2D
 {
-    public class PlatformerCharacter2D : MonoBehaviour
+    public class PlatformerCharacter2D : PunBehaviour
     {
         [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
         [SerializeField] private float m_JumpForce = 400f;                  // Amount of force added when the player jumps.
@@ -87,13 +88,15 @@ namespace UnityStandardAssets._2D
                 if (move > 0 && !m_FacingRight)
                 {
                     // ... flip the player.
-                    Flip();
+                    //Flip();
+                    photonView.RPC("Flip", PhotonTargets.All);
                 }
                     // Otherwise if the input is moving the player left and the player is facing right...
                 else if (move < 0 && m_FacingRight)
                 {
                     // ... flip the player.
-                    Flip();
+                    //Flip();
+                    photonView.RPC("Flip", PhotonTargets.All);
                 }
             }
             // If the player should jump...
@@ -106,7 +109,7 @@ namespace UnityStandardAssets._2D
             }
         }
 
-
+        [PunRPC]
         private void Flip()
         {
             // Switch the way the player is labelled as facing.

@@ -44,4 +44,5 @@ MonoBehaviour:
   - TaggedPlayer
   - Shoot
   - Damaged
+  - Flip
   DisableAutoOpenWizard: 1

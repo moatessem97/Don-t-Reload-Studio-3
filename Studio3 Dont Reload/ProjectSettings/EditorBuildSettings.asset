@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Splash.unity
-    guid: 00000000000000000000000000000000
+    guid: 77eb542c2ed14ae43b98bc2002b2b531
   - enabled: 1
     path: Assets/Scenes/PhotonConnectScene.unity
     guid: 6f9b4c8ff5f1b6f4a9bdbb2326808b2c

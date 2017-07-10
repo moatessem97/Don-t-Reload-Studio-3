@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon;
 
-public class myNetworkManager : Photon.PunBehaviour
+public class myNetworkManager : PunBehaviour
 {
 
     public GameObject[] spawns;

@@ -31,9 +31,13 @@ namespace UnityStandardAssets._2D
         private float timeToSpawnEffect = 0f;
 
         [SerializeField]
-        private int Health, Ammo, maxHealth;
+        private float Health, maxHealth;
+        [SerializeField]
+        private int Ammo;
         [SerializeField]
         private Quaternion ArmTransform;
+
+        private myNetworkManager NetworkManager;
 
         private void Awake()
         {
@@ -46,10 +50,14 @@ namespace UnityStandardAssets._2D
             {
                 Debug.LogError("No Fire Point?  WHAT?!");
             }
-            maxHealth = Health;
-            HPbarImage.fillAmount = Health / maxHealth;
         }
 
+        private void Start()
+        {
+            maxHealth = Health;
+            HPbarImage.fillAmount = Health / maxHealth;
+            NetworkManager = FindObjectOfType<myNetworkManager>();
+        }
 
         private void Update()
         {
@@ -153,6 +161,12 @@ namespace UnityStandardAssets._2D
         {
             Health -= enemyDamage;
             HPbarImage.fillAmount = Health / maxHealth;
+            if (Health <= 0)
+            {
+                transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
+                Health = 300f;
+                HPbarImage.fillAmount = Health / maxHealth;
+            }
         }
 
        private void Effect()
@@ -180,7 +194,7 @@ namespace UnityStandardAssets._2D
             {
                 //// Network player, receive data
                 //this.IsFiring = (bool)stream.ReceiveNext();
-                this.Health = (int)stream.ReceiveNext();
+                this.Health = (float)stream.ReceiveNext();
                 this.Ammo = (int)stream.ReceiveNext();
                 //this.ArmTransform = (Quaternion)stream.ReceiveNext();
             }
