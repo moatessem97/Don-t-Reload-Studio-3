@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 using Photon;
 
@@ -11,13 +12,15 @@ namespace UnityStandardAssets._2D
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
 
+        //Healthbar image
+        public Image HPbarImage;
         // Arm rotation Stuff
-        public int rotationOffset = 90;
+        public int rotationOffset = 0;
         private GameObject arm;
 
         //Weapon Stuff
         public float fireRate = 0f;
-        public float Damage = 10f;
+        public int Damage = 10;
         public LayerMask whatToHit;
         public Transform BulletTrailPrefab;
         public float effectSpawnRate = 10f;
@@ -28,7 +31,9 @@ namespace UnityStandardAssets._2D
         private float timeToSpawnEffect = 0f;
 
         [SerializeField]
-        private int Health, Ammo;
+        private int Health, Ammo, maxHealth;
+        [SerializeField]
+        private Quaternion ArmTransform;
 
         private void Awake()
         {
@@ -41,6 +46,8 @@ namespace UnityStandardAssets._2D
             {
                 Debug.LogError("No Fire Point?  WHAT?!");
             }
+            maxHealth = Health;
+            HPbarImage.fillAmount = Health / maxHealth;
         }
 
 
@@ -83,6 +90,7 @@ namespace UnityStandardAssets._2D
 
             float rotZ = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;   // find the angle in degrees
             arm.transform.rotation = Quaternion.Euler(0f, 0f, rotZ + this.rotationOffset);
+            //ArmTransform = arm.transform.rotation;
         }
 
         // All the weapon Related stuff
@@ -93,7 +101,7 @@ namespace UnityStandardAssets._2D
             {
                 if (Input.GetButtonDown("Fire1"))
                 {
-                    this.Shoot();
+                    photonView.RPC("Shoot",PhotonTargets.All);
                 }
             }
             else
@@ -101,15 +109,15 @@ namespace UnityStandardAssets._2D
                 if (Input.GetButton("Fire1") && Time.time > this.timeToFire)
                 {
                     this.timeToFire = Time.time + 1 / this.fireRate;
-                    this.Shoot();
+                    photonView.RPC("Shoot", PhotonTargets.All);
                 }
             }
         }
-
+        [PunRPC]
         private void Shoot()
         {
             GameObject enemy;
-            PlayerScript playerSC;
+            Platformer2DUserControl enemyController;
             Vector2 screenToWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 mousePosition = new Vector2(screenToWorldPoint.x, screenToWorldPoint.y);
             Vector2 firePointPosition = new Vector2(firePoint.position.x, firePoint.position.y);
@@ -124,18 +132,27 @@ namespace UnityStandardAssets._2D
             {
                 Debug.DrawLine(firePointPosition, hit.point, Color.red);
                 Debug.Log("We hit " + hit.collider.name + " and did " + this.Damage + " damage.");
-                if (hit.collider.tag == "Player")
+                if (hit.collider.tag == "Player" && photonView.isMine)
                 {
-                    enemy = hit.collider.gameObject;
-                    playerSC = enemy.GetComponent<PlayerScript>();
-                    playerSC.Health -= Damage;
-                    Debug.Log(playerSC.Health);
-                    if (playerSC.Health <= 0f)
-                    {
-                        Debug.Log("Enemy is Dead");
-                    }
+                    enemy = hit.collider.gameObject;    
+                    enemyController = enemy.GetComponent<Platformer2DUserControl>();
+                    //enemyController.Damaged(this.Damage);
+                    enemyController.photonView.RPC("Damaged", PhotonTargets.All, this.Damage);
+                    //photonView.RPC("Damaged", PhotonTargets.All);
+                    //Debug.Log(enemyController.Health);
+                    //if (enemyHP <= 0f)
+                    //{
+                    //    Debug.Log("Enemy is Dead");
+                    //}
                 }
             }
+        }
+
+        [PunRPC]
+        public void Damaged(int enemyDamage)
+        {
+            Health -= enemyDamage;
+            HPbarImage.fillAmount = Health / maxHealth;
         }
 
        private void Effect()
@@ -157,6 +174,7 @@ namespace UnityStandardAssets._2D
                 //// We own this player: send the others our data
                 stream.SendNext(Health);
                 stream.SendNext(Ammo);
+               // stream.SendNext(ArmTransform);
             }
             else
             {
@@ -164,6 +182,7 @@ namespace UnityStandardAssets._2D
                 //this.IsFiring = (bool)stream.ReceiveNext();
                 this.Health = (int)stream.ReceiveNext();
                 this.Ammo = (int)stream.ReceiveNext();
+                //this.ArmTransform = (Quaternion)stream.ReceiveNext();
             }
         }
     }
