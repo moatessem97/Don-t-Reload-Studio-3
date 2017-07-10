@@ -37,7 +37,7 @@ public class PhotonConnect : Photon.PunBehaviour
         {
             Debug.Log("Connecting to a room");
             RoomOptions roomOptions = new RoomOptions() { IsVisible = false, MaxPlayers = 2 };
-            PhotonNetwork.JoinOrCreateRoom("Room", roomOptions, TypedLobby.Default);
+            PhotonNetwork.JoinOrCreateRoom("Room1", roomOptions, TypedLobby.Default);
         }
     }
 
