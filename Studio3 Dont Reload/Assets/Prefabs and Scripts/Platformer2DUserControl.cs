@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 using Photon;
 
@@ -11,6 +12,8 @@ namespace UnityStandardAssets._2D
         private PlatformerCharacter2D m_Character;
         private bool m_Jump;
 
+        //Healthbar image
+        public Image HPbarImage;
         // Arm rotation Stuff
         public int rotationOffset = 0;
         private GameObject arm;
@@ -28,7 +31,7 @@ namespace UnityStandardAssets._2D
         private float timeToSpawnEffect = 0f;
 
         [SerializeField]
-        private int Health, Ammo;
+        private int Health, Ammo, maxHealth;
         [SerializeField]
         private Quaternion ArmTransform;
 
@@ -43,6 +46,8 @@ namespace UnityStandardAssets._2D
             {
                 Debug.LogError("No Fire Point?  WHAT?!");
             }
+            maxHealth = Health;
+            HPbarImage.fillAmount = Health / maxHealth;
         }
 
 
@@ -129,7 +134,7 @@ namespace UnityStandardAssets._2D
                 Debug.Log("We hit " + hit.collider.name + " and did " + this.Damage + " damage.");
                 if (hit.collider.tag == "Player" && photonView.isMine)
                 {
-                    enemy = hit.collider.gameObject;
+                    enemy = hit.collider.gameObject;    
                     enemyController = enemy.GetComponent<Platformer2DUserControl>();
                     //enemyController.Damaged(this.Damage);
                     enemyController.photonView.RPC("Damaged", PhotonTargets.All, this.Damage);
@@ -147,6 +152,7 @@ namespace UnityStandardAssets._2D
         public void Damaged(int enemyDamage)
         {
             Health -= enemyDamage;
+            HPbarImage.fillAmount = Health / maxHealth;
         }
 
        private void Effect()
