@@ -25,6 +25,7 @@ namespace UnityStandardAssets._2D
         public Transform BulletTrailPrefab;
         public float effectSpawnRate = 10f;
         public Transform MuzzleFlashPrefab;
+        public Text Score;
 
         private float timeToFire = 0;
         private Transform firePoint;
@@ -33,7 +34,7 @@ namespace UnityStandardAssets._2D
         [SerializeField]
         private float Health, maxHealth;
         [SerializeField]
-        private int Ammo;
+        private int Ammo,Deaths;
         [SerializeField]
         private Quaternion ArmTransform;
 
@@ -57,6 +58,11 @@ namespace UnityStandardAssets._2D
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
             NetworkManager = FindObjectOfType<myNetworkManager>();
+            if (photonView.isMine)
+            {
+                Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+            }
+
         }
 
         private void Update()
@@ -166,6 +172,11 @@ namespace UnityStandardAssets._2D
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
                 Health = 300f;
                 HPbarImage.fillAmount = Health / maxHealth;
+                if (photonView.isMine)
+                {
+                    Deaths++;
+                    Score.text = Deaths.ToString();
+                }
             }
         }
 

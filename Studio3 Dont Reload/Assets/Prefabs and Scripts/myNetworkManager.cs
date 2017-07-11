@@ -5,7 +5,6 @@ using Photon;
 
 public class myNetworkManager : PunBehaviour
 {
-
     public GameObject[] spawns;
     private string Charr;
 
@@ -18,5 +17,10 @@ public class myNetworkManager : PunBehaviour
     {
         Charr = PlayerPrefs.GetString("Charr");
         PhotonNetwork.Instantiate(Charr, spawns[PhotonNetwork.player.ID - 1].transform.position, Quaternion.identity, 0);
+    }
+
+    public void menuButton()
+    {
+        Application.LoadLevel("PhotonConnectScene");
     }
 }
