@@ -626,9 +626,12 @@ MonoBehaviour:
   BulletTrailPrefab: {fileID: 422280, guid: ff6d998de2a4b4a58ba2b4dfe924e7a3, type: 2}
   effectSpawnRate: 10
   MuzzleFlashPrefab: {fileID: 409904, guid: 3039ed71d59d74128b0544b37dd8d672, type: 2}
-  Health: 300
-  Ammo: 0
+  Score: {fileID: 0}
+  AmmoText: {fileID: 0}
+  Health: 60
   maxHealth: 0
+  Ammo: 0
+  Deaths: 0
   ArmTransform: {x: 0, y: 0, z: 0, w: 0}
 --- !u!212 &212243557507627944
 SpriteRenderer:

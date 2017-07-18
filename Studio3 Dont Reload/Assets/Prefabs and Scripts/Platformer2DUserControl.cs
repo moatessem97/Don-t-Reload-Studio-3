@@ -25,7 +25,9 @@ namespace UnityStandardAssets._2D
         public Transform BulletTrailPrefab;
         public float effectSpawnRate = 10f;
         public Transform MuzzleFlashPrefab;
-        public Text Score;
+        public Text Score, AmmoText;
+
+        private bool isReloading = false;
 
         private float timeToFire = 0;
         private Transform firePoint;
@@ -34,7 +36,7 @@ namespace UnityStandardAssets._2D
         [SerializeField]
         private float Health, maxHealth;
         [SerializeField]
-        private int Ammo,Deaths;
+        private int Ammo,Deaths,maxAmmo;
         [SerializeField]
         private Quaternion ArmTransform;
 
@@ -61,6 +63,10 @@ namespace UnityStandardAssets._2D
             if (photonView.isMine)
             {
                 Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+                AmmoText = GameObject.FindGameObjectWithTag("Ammo").GetComponent<Text>();
+                maxAmmo = 35;
+                Ammo = maxAmmo;
+                AmmoText.text = Ammo.ToString();
             }
 
         }
@@ -111,21 +117,47 @@ namespace UnityStandardAssets._2D
 
         private void Weapon()
         {
-            if (this.fireRate == 0)
+            if (isReloading == true)
             {
-                if (Input.GetButtonDown("Fire1"))
+                return;
+            }
+                if (Ammo > 0)
                 {
-                    photonView.RPC("Shoot",PhotonTargets.All);
+                    if (this.fireRate == 0)
+                    {
+                        if (Input.GetButtonDown("Fire1"))
+                        {
+                            photonView.RPC("Shoot", PhotonTargets.All);
+                            Ammo--;
+                            AmmoText.text = Ammo.ToString();
+                        }
+                    }
+                    else
+                    {
+                        if (Input.GetButton("Fire1") && Time.time > this.timeToFire)
+                        {
+                            this.timeToFire = Time.time + 1 / this.fireRate;
+                            photonView.RPC("Shoot", PhotonTargets.All);
+                            Ammo--;
+                            AmmoText.text = Ammo.ToString();
+                        }
+                    }
+                }
+                else
+                {
+                    if (Ammo == 0 && isReloading == false)
+                    {
+                        isReloading = true;
+                        Invoke("Reloading", 1.5f);
+                    }
                 }
             }
-            else
-            {
-                if (Input.GetButton("Fire1") && Time.time > this.timeToFire)
-                {
-                    this.timeToFire = Time.time + 1 / this.fireRate;
-                    photonView.RPC("Shoot", PhotonTargets.All);
-                }
-            }
+
+        private void Reloading()
+        {
+            Ammo = maxAmmo;
+            AmmoText.text = Ammo.ToString();
+            isReloading = false;
         }
         [PunRPC]
         private void Shoot()

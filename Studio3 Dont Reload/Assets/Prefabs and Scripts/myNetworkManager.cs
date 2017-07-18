@@ -21,6 +21,12 @@ public class myNetworkManager : PunBehaviour
 
     public void menuButton()
     {
-        Application.LoadLevel("PhotonConnectScene");
+        OnLeaveRoom();
+        PhotonNetwork.LoadLevel(1);
+    }
+
+    private void OnLeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
     }
 }
