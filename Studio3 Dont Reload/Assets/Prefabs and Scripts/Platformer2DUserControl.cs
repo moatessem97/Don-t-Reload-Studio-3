@@ -73,10 +73,10 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
-            //if (!photonView.isMine)
-            //{
-            //    return;
-            //}
+            if (!photonView.isMine)
+            {
+                return;
+            }
             if (!m_Jump)
             {
                 // Read the jump input in Update so button presses aren't missed.
@@ -90,10 +90,10 @@ namespace UnityStandardAssets._2D
 
         private void FixedUpdate()
         {
-            //if (!photonView.isMine)
-            //{
-            //    return;
-            //}
+            if (!photonView.isMine)
+            {
+                return;
+            }
             // Read the inputs.
             bool crouch = Input.GetKey(KeyCode.LeftControl);
             float h = CrossPlatformInputManager.GetAxis("Horizontal");
