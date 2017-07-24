@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Score
   - Ammo
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 215692257}
   m_Layer: 0
   m_Name: Platform 2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -208,7 +208,7 @@ Transform:
   m_LocalScale: {x: 1.1749995, y: 1.1999995, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &241345930
 GameObject:
@@ -222,7 +222,7 @@ GameObject:
   - component: {fileID: 241345931}
   m_Layer: 0
   m_Name: PlatSpawn (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -303,7 +303,7 @@ Transform:
   m_LocalScale: {x: 8.4194765, y: 2.1226552, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &345608770
 GameObject:
@@ -564,7 +564,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &527892712
 GameObject:
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 527892713}
   m_Layer: 0
   m_Name: Platform 1
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -668,7 +668,7 @@ Transform:
   m_LocalScale: {x: 1.4812503, y: 1.500625, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &611642079
 GameObject:
@@ -730,7 +730,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &673180175
 GameObject:
@@ -823,7 +823,7 @@ RectTransform:
   - {fileID: 1790009041}
   - {fileID: 351845865}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -842,7 +842,7 @@ GameObject:
   - component: {fileID: 902854785}
   m_Layer: 0
   m_Name: PlatSpawn (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -923,7 +923,7 @@ Transform:
   m_LocalScale: {x: 9.050938, y: 2.1226552, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &913279656
 GameObject:
@@ -1140,7 +1140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.74, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 19
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &1108179843
 GameObject:
@@ -1194,7 +1194,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1148184976
 GameObject:
@@ -1318,6 +1318,58 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1148184976}
+--- !u!1001 &1173568165
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4409076781882426, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.7601528
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409076781882426, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3.5440526
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409076781882426, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409076781882426, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409076781882426, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409076781882426, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409076781882426, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4409076781882426, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114241610134110230, guid: 58fd4be8b694d5049b24dc1986fdf668,
+        type: 2}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114241610134110230, guid: 58fd4be8b694d5049b24dc1986fdf668,
+        type: 2}
+      propertyPath: instantiationId
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 58fd4be8b694d5049b24dc1986fdf668, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1269344762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1330,7 +1382,7 @@ GameObject:
   - component: {fileID: 1269344763}
   m_Layer: 0
   m_Name: PlatSpawn (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1411,7 +1463,7 @@ Transform:
   m_LocalScale: {x: 4.864879, y: 2.1226552, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 21
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1279134959
 GameObject:
@@ -1482,7 +1534,7 @@ Transform:
   m_LocalScale: {x: 7.346082, y: 6.3545933, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1279134962
 MonoBehaviour:
@@ -1524,7 +1576,7 @@ GameObject:
   - component: {fileID: 1332550789}
   m_Layer: 0
   m_Name: Platform 3
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1612,7 +1664,7 @@ Transform:
   m_LocalScale: {x: 1.5715613, y: 1.4428127, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1376614677
 GameObject:
@@ -1626,7 +1678,7 @@ GameObject:
   - component: {fileID: 1376614678}
   m_Layer: 0
   m_Name: PlatSpawn
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1707,7 +1759,7 @@ Transform:
   m_LocalScale: {x: 2.4055648, y: 2.1226552, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1392020161
 GameObject:
@@ -1838,7 +1890,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1448661082
 MonoBehaviour:
@@ -1940,7 +1992,7 @@ GameObject:
   - component: {fileID: 1533947498}
   m_Layer: 0
   m_Name: Platform 3 (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2028,7 +2080,7 @@ Transform:
   m_LocalScale: {x: 1.5715613, y: 1.4428127, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1555219082
 GameObject:
@@ -2057,7 +2109,7 @@ Transform:
   m_Children:
   - {fileID: 1392020163}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1790009040
 GameObject:
@@ -2160,7 +2212,7 @@ Transform:
   m_Children:
   - {fileID: 347082851}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1937517962
 GameObject:
@@ -2188,7 +2240,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1987366674
 GameObject:
@@ -2202,7 +2254,7 @@ GameObject:
   - component: {fileID: 1987366675}
   m_Layer: 0
   m_Name: PlatSpawn 2
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2283,7 +2335,7 @@ Transform:
   m_LocalScale: {x: 2.4055648, y: 2.1226552, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2092977889
 GameObject:
@@ -2337,7 +2389,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.74, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &2130569035
 GameObject:
@@ -2391,5 +2443,5 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
