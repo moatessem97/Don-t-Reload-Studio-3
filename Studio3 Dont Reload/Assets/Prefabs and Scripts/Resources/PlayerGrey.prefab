@@ -380,7 +380,7 @@ MonoBehaviour:
   Score: {fileID: 0}
   AmmoText: {fileID: 0}
   Health: 60
-  maxHealth: 0
+  maxHealth: 60
   Ammo: 0
   Deaths: 0
   maxAmmo: 0

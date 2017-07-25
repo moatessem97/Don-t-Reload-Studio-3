@@ -25,7 +25,7 @@ namespace UnityStandardAssets._2D
         public Transform BulletTrailPrefab;
         public float effectSpawnRate = 10f;
         public Transform MuzzleFlashPrefab;
-        public Text Score, AmmoText;
+        public Text Score, AmmoText, KillText;
 
         private bool isReloading = false;
 
@@ -36,7 +36,7 @@ namespace UnityStandardAssets._2D
         [SerializeField]
         private float Health, maxHealth;
         [SerializeField]
-        private int Ammo,Deaths,maxAmmo;
+        private int Ammo,Deaths,maxAmmo,Kills;
         [SerializeField]
         private Quaternion ArmTransform;
 
@@ -57,6 +57,7 @@ namespace UnityStandardAssets._2D
 
         private void Start()
         {
+
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
             NetworkManager = FindObjectOfType<myNetworkManager>();
@@ -183,7 +184,7 @@ namespace UnityStandardAssets._2D
                     enemy = hit.collider.gameObject;    
                     enemyController = enemy.GetComponent<Platformer2DUserControl>();
                     //enemyController.Damaged(this.Damage);
-                    enemyController.photonView.RPC("Damaged", PhotonTargets.All, this.Damage);
+                    enemyController.photonView.RPC("Damaged", PhotonTargets.All, this.Damage, this.gameObject);
                     //photonView.RPC("Damaged", PhotonTargets.All);
                     //Debug.Log(enemyController.Health);
                     //if (enemyHP <= 0f)
@@ -195,8 +196,10 @@ namespace UnityStandardAssets._2D
         }
 
         [PunRPC]
-        public void Damaged(int enemyDamage)
+        public void Damaged(int enemyDamage,GameObject shooter)
         {
+            Platformer2DUserControl shooterController;
+            shooterController = shooter.GetComponent<Platformer2DUserControl>();
             Health -= enemyDamage;
             HPbarImage.fillAmount = Health / maxHealth;
             if (Health <= 0)
@@ -204,6 +207,8 @@ namespace UnityStandardAssets._2D
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
                 Health = maxHealth;
                 HPbarImage.fillAmount = Health / maxHealth;
+                shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
+
                 if (photonView.isMine)
                 {
                     Deaths++;
@@ -212,7 +217,14 @@ namespace UnityStandardAssets._2D
             }
         }
 
-       private void Effect()
+        [PunRPC]
+        public void GotAKill()
+        {
+            Kills++;
+            KillText.text = Kills.ToString();
+        }
+
+        private void Effect()
         {
             Instantiate(this.BulletTrailPrefab, this.firePoint.position, firePoint.rotation);
             Transform clone = (Transform)Instantiate(this.MuzzleFlashPrefab, this.firePoint.position, firePoint.rotation);
@@ -231,6 +243,7 @@ namespace UnityStandardAssets._2D
                 //// We own this player: send the others our data
                 stream.SendNext(Health);
                 stream.SendNext(Ammo);
+                stream.SendNext(Kills);
                // stream.SendNext(ArmTransform);
             }
             else
@@ -239,6 +252,7 @@ namespace UnityStandardAssets._2D
                 //this.IsFiring = (bool)stream.ReceiveNext();
                 this.Health = (float)stream.ReceiveNext();
                 this.Ammo = (int)stream.ReceiveNext();
+                this.Kills = (int)stream.ReceiveNext();
                 //this.ArmTransform = (Quaternion)stream.ReceiveNext();
             }
         }
