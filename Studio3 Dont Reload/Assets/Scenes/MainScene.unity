@@ -1475,7 +1475,6 @@ GameObject:
   - component: {fileID: 1279134961}
   - component: {fileID: 1279134960}
   - component: {fileID: 1279134962}
-  - component: {fileID: 1279134963}
   m_Layer: 0
   m_Name: Space
   m_TagString: Untagged
@@ -1544,26 +1543,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1279134959}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0325c2b52a6f4ab28c74182255379e2, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ae059eadf784884497b6cd0470d531e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offsetX: 2
-  hasARightBuddy: 0
-  hasALeftBuddy: 0
-  reverseScale: 1
---- !u!114 &1279134963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1279134959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ab58fbd11cb11a41b18eb42d4f3985a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: 3
-  tileSizeZ: 3
+  Speed: 1
 --- !u!1 &1332550788
 GameObject:
   m_ObjectHideFlags: 0
