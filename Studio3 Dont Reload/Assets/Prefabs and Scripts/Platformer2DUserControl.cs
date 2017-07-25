@@ -202,7 +202,7 @@ namespace UnityStandardAssets._2D
             if (Health <= 0)
             {
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
-                Health = 300f;
+                Health = maxHealth;
                 HPbarImage.fillAmount = Health / maxHealth;
                 if (photonView.isMine)
                 {
