@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PhotonConnect : Photon.PunBehaviour
 {
 
+    public Text myText;
     public Button Connect;
     const string VERSION = "v0.0.1";
     // Use this for initialization
@@ -35,7 +36,7 @@ public class PhotonConnect : Photon.PunBehaviour
     {
         if (PhotonNetwork.connected)
         {
-            Debug.Log("Connecting to a room");
+            myText.text = "Connecting to a room";
             RoomOptions roomOptions = new RoomOptions() { IsVisible = false, MaxPlayers = 2 };
             PhotonNetwork.JoinOrCreateRoom("Room1", roomOptions, TypedLobby.Default);
         }

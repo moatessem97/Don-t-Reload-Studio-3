@@ -45,4 +45,5 @@ MonoBehaviour:
   - Shoot
   - Damaged
   - Flip
+  - GotAKill
   DisableAutoOpenWizard: 1

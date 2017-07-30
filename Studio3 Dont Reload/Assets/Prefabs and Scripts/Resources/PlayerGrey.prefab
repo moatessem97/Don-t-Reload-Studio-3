@@ -215,8 +215,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1446128075787132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.53, y: 0.07, z: 0}
-  m_LocalScale: {x: 1.7715331, y: 1.7715304, z: 1}
+  m_LocalPosition: {x: 0.514, y: 0.043, z: 0}
+  m_LocalScale: {x: 1.5536246, y: 1.5536221, z: 0.8769944}
   m_Children: []
   m_Father: {fileID: 4559285724418798}
   m_RootOrder: 0
@@ -268,7 +268,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1783304113615554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.7305946, y: 13.90356, z: 0}
+  m_LocalPosition: {x: 7.49823, y: 14.280289, z: 0}
   m_LocalScale: {x: 1.7715329, y: 1.7715304, z: 1}
   m_Children:
   - {fileID: 4591697432733730}
@@ -379,11 +379,13 @@ MonoBehaviour:
   MuzzleFlashPrefab: {fileID: 409904, guid: 3039ed71d59d74128b0544b37dd8d672, type: 2}
   Score: {fileID: 0}
   AmmoText: {fileID: 0}
+  KillText: {fileID: 0}
   Health: 60
   maxHealth: 60
   Ammo: 0
   Deaths: 0
   maxAmmo: 0
+  Kills: 0
   ArmTransform: {x: 0, y: 0, z: 0, w: 0}
 --- !u!114 &114160183407859540
 MonoBehaviour:

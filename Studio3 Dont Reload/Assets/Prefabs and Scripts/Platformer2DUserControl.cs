@@ -36,11 +36,15 @@ namespace UnityStandardAssets._2D
         [SerializeField]
         private float Health, maxHealth;
         [SerializeField]
-        private int Ammo,Deaths,maxAmmo,Kills;
+        private int Ammo,Deaths,maxAmmo,Kills,myID;
         [SerializeField]
         private Quaternion ArmTransform;
 
         private myNetworkManager NetworkManager;
+
+        [SerializeField]
+        private GameObject[] players;
+        public int[] playerIDs;
 
         private void Awake()
         {
@@ -57,6 +61,7 @@ namespace UnityStandardAssets._2D
 
         private void Start()
         {
+            playerIDs = new int[2];
 
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
@@ -65,9 +70,13 @@ namespace UnityStandardAssets._2D
             {
                 Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
                 AmmoText = GameObject.FindGameObjectWithTag("Ammo").GetComponent<Text>();
+                KillText = GameObject.FindGameObjectWithTag("Kills").GetComponent<Text>();
                 maxAmmo = 35;
                 Ammo = maxAmmo;
                 AmmoText.text = Ammo.ToString();
+                myID = PhotonNetwork.player.ID;
+                Invoke("GettingPlayers", 1f);
+                Invoke("GettingIDs", 1.2f);
             }
 
         }
@@ -184,7 +193,7 @@ namespace UnityStandardAssets._2D
                     enemy = hit.collider.gameObject;    
                     enemyController = enemy.GetComponent<Platformer2DUserControl>();
                     //enemyController.Damaged(this.Damage);
-                    enemyController.photonView.RPC("Damaged", PhotonTargets.All, this.Damage, this.gameObject);
+                    enemyController.photonView.RPC("Damaged", PhotonTargets.All, this.Damage,myID);
                     //photonView.RPC("Damaged", PhotonTargets.All);
                     //Debug.Log(enemyController.Health);
                     //if (enemyHP <= 0f)
@@ -196,10 +205,11 @@ namespace UnityStandardAssets._2D
         }
 
         [PunRPC]
-        public void Damaged(int enemyDamage,GameObject shooter)
+        public void Damaged(int enemyDamage,int enemyID)
         {
-            Platformer2DUserControl shooterController;
-            shooterController = shooter.GetComponent<Platformer2DUserControl>();
+            
+            //players = GameObject.FindObjectsOfType<Platformer2DUserControl>();
+            //Platformer2DUserControl shooterController;
             Health -= enemyDamage;
             HPbarImage.fillAmount = Health / maxHealth;
             if (Health <= 0)
@@ -207,7 +217,14 @@ namespace UnityStandardAssets._2D
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
                 Health = maxHealth;
                 HPbarImage.fillAmount = Health / maxHealth;
-                shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
+                //shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
+                for(int i = 0;i < playerIDs.Length;i++)
+                {
+                    if(playerIDs[i] == enemyID)
+                    {
+                        players[i].GetComponent<Platformer2DUserControl>().photonView.RPC("GotAKill", PhotonTargets.All);
+                    }
+                }
 
                 if (photonView.isMine)
                 {
@@ -235,6 +252,19 @@ namespace UnityStandardAssets._2D
         }
 
 
+        private void GettingIDs()
+        {
+            for (int i = 0; i < players.Length; i++)
+            {
+                playerIDs[i] = players[i].GetComponent<Platformer2DUserControl>().myID;
+            }
+        }
+
+        private void GettingPlayers()
+        {
+            players = GameObject.FindGameObjectsWithTag("Player");
+        }
+
 
         void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
@@ -243,7 +273,6 @@ namespace UnityStandardAssets._2D
                 //// We own this player: send the others our data
                 stream.SendNext(Health);
                 stream.SendNext(Ammo);
-                stream.SendNext(Kills);
                // stream.SendNext(ArmTransform);
             }
             else
@@ -252,7 +281,6 @@ namespace UnityStandardAssets._2D
                 //this.IsFiring = (bool)stream.ReceiveNext();
                 this.Health = (float)stream.ReceiveNext();
                 this.Ammo = (int)stream.ReceiveNext();
-                this.Kills = (int)stream.ReceiveNext();
                 //this.ArmTransform = (Quaternion)stream.ReceiveNext();
             }
         }
