@@ -268,7 +268,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1783304113615554}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.49823, y: 14.280289, z: 0}
+  m_LocalPosition: {x: 7.254877, y: 1.5998793, z: 0}
   m_LocalScale: {x: 1.7715329, y: 1.7715304, z: 1}
   m_Children:
   - {fileID: 4591697432733730}
@@ -380,13 +380,21 @@ MonoBehaviour:
   Score: {fileID: 0}
   AmmoText: {fileID: 0}
   KillText: {fileID: 0}
+  Guns:
+  - {fileID: 0}
+  - {fileID: 21300020, guid: 2e85f94ec8ae7364489aa9331bdfa09d, type: 3}
+  - {fileID: 21300000, guid: 0ab90a1e6fd62904f86cbca613f2c1d6, type: 3}
   Health: 60
   maxHealth: 60
   Ammo: 0
   Deaths: 0
   maxAmmo: 0
   Kills: 0
+  myID: 0
+  myCurrGun: 0
   ArmTransform: {x: 0, y: 0, z: 0, w: 0}
+  players: []
+  playerIDs: 
 --- !u!114 &114160183407859540
 MonoBehaviour:
   m_ObjectHideFlags: 1

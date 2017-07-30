@@ -46,4 +46,5 @@ MonoBehaviour:
   - Damaged
   - Flip
   - GotAKill
+  - GunUpgrade
   DisableAutoOpenWizard: 1

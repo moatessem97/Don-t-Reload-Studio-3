@@ -5,11 +5,14 @@ using System.Collections;
 THE FOLLOWING SCRIPT WAS WRITTEN BY DAVID ROSEN. IT IS FREE TO USE WITH ACKNOWLEDGEMENT OF THE CREATOR.
 IT IS INTENDED FOR USE WITH AWARD SPACE (https://www.awardspace.net/), PHP and MySQL
 */
+
 public class SQLLogin : MonoBehaviour
 {
     //THE FOLLOWING ARE REFERENCES TO THE UI INPUT FIELDS THAT THE PLAYER TYPES INTO
     public Text usernameText, passwordText, regNameText, regUsernameText, regPassText, regConfPassText, regEmailText;
     public Text messageText; //THIS IS THE TEXT TO BE DISPLAYED ON SCREEN TO THE PLAYER
+
+    public GameObject canvas;
 
     //THE FOLLOWING VARIBALES ARE POPULATED BY THE TEXT THE PLAYER ENTERS INTO THE CORRESPONDING INPUT FIELDS
     private string username, password, regName, regUsername, regPass, regConfPass, regEmail;
@@ -74,6 +77,7 @@ public class SQLLogin : MonoBehaviour
             {
                 // WHAT HAPPENS WHEN THE PLAYER LOGS IN
                 Debug.Log("shizlogged");
+                canvas.GetComponent<PhotonConnect>().ConnectToRoom();
             }
             else
                 messageText.text = _w.text;    //THE PHP SCRIPT SUPPLIED WILL TELL THE PLAYER IF THEIR PASSWORD IS INCORRECT, OR IF THEIR USERNAME DOESN'T EXIST

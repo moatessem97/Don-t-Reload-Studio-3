@@ -33,10 +33,15 @@ namespace UnityStandardAssets._2D
         private Transform firePoint;
         private float timeToSpawnEffect = 0f;
 
+        //public Sprite myDefaultGun,Gun2,Gun3;
+        public Sprite[] Guns;
+
+        private SpriteRenderer myGunRenderer;
+        
         [SerializeField]
         private float Health, maxHealth;
         [SerializeField]
-        private int Ammo,Deaths,maxAmmo,Kills,myID;
+        private int Ammo,Deaths,maxAmmo,Kills,myID,myCurrGun;
         [SerializeField]
         private Quaternion ArmTransform;
 
@@ -57,10 +62,13 @@ namespace UnityStandardAssets._2D
             {
                 Debug.LogError("No Fire Point?  WHAT?!");
             }
+            myGunRenderer = gameObject.transform.GetChild(3).GetChild(0).GetComponent<SpriteRenderer>();
+            Guns[0] = myGunRenderer.sprite;
         }
 
         private void Start()
         {
+            myCurrGun = 0;
             playerIDs = new int[2];
 
             maxHealth = Health;
@@ -68,13 +76,13 @@ namespace UnityStandardAssets._2D
             NetworkManager = FindObjectOfType<myNetworkManager>();
             if (photonView.isMine)
             {
+                this.myID = PhotonNetwork.player.ID;
                 Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
                 AmmoText = GameObject.FindGameObjectWithTag("Ammo").GetComponent<Text>();
                 KillText = GameObject.FindGameObjectWithTag("Kills").GetComponent<Text>();
                 maxAmmo = 35;
                 Ammo = maxAmmo;
                 AmmoText.text = Ammo.ToString();
-                myID = PhotonNetwork.player.ID;
                 Invoke("GettingPlayers", 1f);
                 Invoke("GettingIDs", 1.2f);
             }
@@ -83,6 +91,10 @@ namespace UnityStandardAssets._2D
 
         private void Update()
         {
+            //if (Input.GetKeyUp(KeyCode.F))
+            //{
+            //    myGunRenderer.sprite = Guns[2];
+            //}
             if (!photonView.isMine)
             {
                 return;
@@ -230,6 +242,11 @@ namespace UnityStandardAssets._2D
                 {
                     Deaths++;
                     Score.text = Deaths.ToString();
+                    if (myCurrGun > 0)
+                    {
+                        myCurrGun--;
+                        photonView.RPC("GunUpgrade", PhotonTargets.All,myCurrGun);
+                    }
                 }
             }
         }
@@ -237,8 +254,17 @@ namespace UnityStandardAssets._2D
         [PunRPC]
         public void GotAKill()
         {
+            if (!photonView.isMine)
+            {
+                return;
+            }
             Kills++;
             KillText.text = Kills.ToString();
+            if(myCurrGun < 2)
+            {
+                myCurrGun++;
+                photonView.RPC("GunUpgrade", PhotonTargets.All,myCurrGun);
+            }
         }
 
         private void Effect()
@@ -265,6 +291,34 @@ namespace UnityStandardAssets._2D
             players = GameObject.FindGameObjectsWithTag("Player");
         }
 
+        [PunRPC]
+        private void GunUpgrade(int CurrentGun)
+        {
+            myGunRenderer.sprite = Guns[CurrentGun];
+            if (CurrentGun == 0)
+            {
+                this.Damage = 10;
+                this.fireRate = 5f;
+                this.maxAmmo = 35;
+                this.Ammo = maxAmmo;
+            }
+            if (CurrentGun == 1)
+            {
+                this.Damage = 4;
+                this.fireRate = 14f;
+                this.maxAmmo = 100;
+                this.Ammo = maxAmmo;
+            }
+            if (CurrentGun == 2)
+            {
+                this.Damage = 30;
+                this.fireRate = 1f;
+                this.maxAmmo = 5;
+                this.Ammo = maxAmmo;
+            }
+
+        }
+
 
         void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
@@ -273,7 +327,9 @@ namespace UnityStandardAssets._2D
                 //// We own this player: send the others our data
                 stream.SendNext(Health);
                 stream.SendNext(Ammo);
-               // stream.SendNext(ArmTransform);
+                stream.SendNext(myID);
+                stream.SendNext(Damage);
+                stream.SendNext(myCurrGun);
             }
             else
             {
@@ -281,7 +337,9 @@ namespace UnityStandardAssets._2D
                 //this.IsFiring = (bool)stream.ReceiveNext();
                 this.Health = (float)stream.ReceiveNext();
                 this.Ammo = (int)stream.ReceiveNext();
-                //this.ArmTransform = (Quaternion)stream.ReceiveNext();
+                this.myID = (int)stream.ReceiveNext();
+                this.Damage = (int)stream.ReceiveNext();
+                this.myCurrGun = (int)stream.ReceiveNext();
             }
         }
     }
