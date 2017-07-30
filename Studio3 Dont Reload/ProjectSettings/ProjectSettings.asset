@@ -138,7 +138,7 @@ PlayerSettings:
   useHDRDisplay: 0
   applicationIdentifier:
     Android: com.Company.ProductName
-    Standalone: unity.DefaultCompany.brackeys-unity-2d-platformer
+    Standalone: unity.DefaultCompany.DontReload
     Tizen: com.Company.ProductName
     iOS: com.Company.ProductName
     tvOS: com.Company.ProductName
