@@ -449,7 +449,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SplashImg: {fileID: 1576038936}
-  loadLevel: PhotonConnectScene
+  loadLevel: Menu
 --- !u!4 &2145512386
 Transform:
   m_ObjectHideFlags: 0
