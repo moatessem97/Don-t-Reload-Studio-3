@@ -2,8 +2,6 @@ using System;
 using UnityEngine;
 using Photon;
 
-namespace UnityStandardAssets._2D
-{
     public class PlatformerCharacter2D : PunBehaviour
     {
         [SerializeField] private float m_MaxSpeed = 10f;                    // The fastest the player can travel in the x axis.
@@ -121,4 +119,3 @@ namespace UnityStandardAssets._2D
             this.playerGraphics.localScale = theScale;
         }
     }
-}

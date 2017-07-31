@@ -4,8 +4,6 @@ using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 using Photon;
 
-namespace UnityStandardAssets._2D
-{
     [RequireComponent(typeof(PlatformerCharacter2D))]
     public class Platformer2DUserControl : PunBehaviour
     {
@@ -28,6 +26,7 @@ namespace UnityStandardAssets._2D
         public Text Score, AmmoText, KillText;
 
         private bool isReloading = false;
+        private bool isInvincible = false;
 
         private float timeToFire = 0;
         private Transform firePoint;
@@ -39,7 +38,7 @@ namespace UnityStandardAssets._2D
         private SpriteRenderer myGunRenderer;
         
         [SerializeField]
-        private float Health, maxHealth;
+        private float Health, maxHealth,reloadTimer,invincibilityTimer;
         [SerializeField]
         private int Ammo,Deaths,maxAmmo,Kills,myID,myCurrGun;
         [SerializeField]
@@ -64,12 +63,14 @@ namespace UnityStandardAssets._2D
             }
             myGunRenderer = gameObject.transform.GetChild(3).GetChild(0).GetComponent<SpriteRenderer>();
             Guns[0] = myGunRenderer.sprite;
+            invincibilityTimer = 2.0f;
         }
 
         private void Start()
         {
             myCurrGun = 0;
             playerIDs = new int[2];
+            reloadTimer = 1.5f;
 
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
@@ -170,7 +171,7 @@ namespace UnityStandardAssets._2D
                     if (Ammo == 0 && isReloading == false)
                     {
                         isReloading = true;
-                        Invoke("Reloading", 1.5f);
+                        Invoke("Reloading", reloadTimer);
                     }
                 }
             }
@@ -229,15 +230,18 @@ namespace UnityStandardAssets._2D
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
                 Health = maxHealth;
                 HPbarImage.fillAmount = Health / maxHealth;
-                //shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
-                for(int i = 0;i < playerIDs.Length;i++)
+            //shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
+            if (enemyID != 30)
+           {
+                //if enemy ID is 30 it'll be the enviroment that'll be killing the player
+                for (int i = 0; i < playerIDs.Length; i++)
                 {
-                    if(playerIDs[i] == enemyID)
+                    if (playerIDs[i] == enemyID)
                     {
                         players[i].GetComponent<Platformer2DUserControl>().photonView.RPC("GotAKill", PhotonTargets.All);
                     }
                 }
-
+            }
                 if (photonView.isMine)
                 {
                     Deaths++;
@@ -319,6 +323,11 @@ namespace UnityStandardAssets._2D
 
         }
 
+        private void Invincibility()
+    {
+
+    }
+
 
         void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
         {
@@ -330,6 +339,7 @@ namespace UnityStandardAssets._2D
                 stream.SendNext(myID);
                 stream.SendNext(Damage);
                 stream.SendNext(myCurrGun);
+                stream.SendNext(isInvincible);
             }
             else
             {
@@ -340,7 +350,8 @@ namespace UnityStandardAssets._2D
                 this.myID = (int)stream.ReceiveNext();
                 this.Damage = (int)stream.ReceiveNext();
                 this.myCurrGun = (int)stream.ReceiveNext();
+                this.isInvincible = (bool)stream.ReceiveNext();
             }
         }
     }
-}
+
