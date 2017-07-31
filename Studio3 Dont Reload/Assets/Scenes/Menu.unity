@@ -664,7 +664,7 @@ Prefab:
     - target: {fileID: 114649487685255296, guid: dc801f9d13b52724185c88c669cf0a9e,
         type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: PhotonConnect
+      value: PhotonConnectScene
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114981907083796896, guid: dc801f9d13b52724185c88c669cf0a9e, type: 2}
