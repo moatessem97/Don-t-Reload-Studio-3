@@ -11,4 +11,9 @@ public class MoveTrail : MonoBehaviour
 		transform.Translate (Vector3.right * Time.deltaTime * this.moveSpeed);
 		Destroy (gameObject, 1);
 	}
+
+    private void OnTriggerEnter2D()
+    {
+        Destroy(gameObject);
+    }
 }
