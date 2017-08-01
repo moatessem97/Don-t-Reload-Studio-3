@@ -220,7 +220,11 @@ using Photon;
         [PunRPC]
         public void Damaged(int enemyDamage,int enemyID)
         {
-            
+            if(isInvincible == true)
+        {
+            Debug.Log("Target is invincible for ");
+            return;
+        }
             //players = GameObject.FindObjectsOfType<Platformer2DUserControl>();
             //Platformer2DUserControl shooterController;
             Health -= enemyDamage;
@@ -230,6 +234,8 @@ using Photon;
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
                 Health = maxHealth;
                 HPbarImage.fillAmount = Health / maxHealth;
+                this.isInvincible = true;
+                Invoke("Invincibility", invincibilityTimer);
             //shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
             if (enemyID != 30)
            {
@@ -325,7 +331,7 @@ using Photon;
 
         private void Invincibility()
     {
-
+        isInvincible = false;
     }
 
 
