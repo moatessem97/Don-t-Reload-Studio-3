@@ -47,4 +47,5 @@ MonoBehaviour:
   - Flip
   - GotAKill
   - GunUpgrade
+  - endGame
   DisableAutoOpenWizard: 1
