@@ -14,7 +14,7 @@ using Photon;
         public Image HPbarImage;
         // Arm rotation Stuff
         public int rotationOffset = 0;
-        private GameObject arm;
+        private GameObject arm,endgameCanvas;
 
         //Weapon Stuff
         public float fireRate = 0f;
@@ -27,6 +27,7 @@ using Photon;
 
         private bool isReloading = false;
         private bool isInvincible = false;
+        private bool isEndGame = false;
 
         private float timeToFire = 0;
         private Transform firePoint;
@@ -55,6 +56,7 @@ using Photon;
             m_Character = GetComponent<PlatformerCharacter2D>();
             //Getting the Arm
             arm = gameObject.transform.GetChild(3).gameObject;
+            endgameCanvas = GameObject.FindGameObjectWithTag("EndGame");
             //Getting the Firepoint
             this.firePoint = gameObject.transform.GetChild(3).GetChild(0).GetChild(0);/*transform.Find ("Fire Point");*/
             if (this.firePoint == null)
@@ -92,10 +94,15 @@ using Photon;
 
         private void Update()
         {
-            //if (Input.GetKeyUp(KeyCode.F))
-            //{
-            //    myGunRenderer.sprite = Guns[2];
-            //}
+        //if (Input.GetKeyUp(KeyCode.F))
+        //{
+        //    myGunRenderer.sprite = Guns[2];
+        //}
+        if (isEndGame)
+        {
+            return;
+        }
+            HPbarImage.fillAmount = Health / maxHealth;
             if (!photonView.isMine)
             {
                 return;
@@ -107,13 +114,16 @@ using Photon;
             }
             ArmRotation();
             Weapon();
-
         }
 
 
         private void FixedUpdate()
         {
-            if (!photonView.isMine)
+        if (isEndGame)
+        {
+            return;
+        }
+        if (!photonView.isMine)
             {
                 return;
             }
@@ -228,12 +238,12 @@ using Photon;
             //players = GameObject.FindObjectsOfType<Platformer2DUserControl>();
             //Platformer2DUserControl shooterController;
             Health -= enemyDamage;
-            HPbarImage.fillAmount = Health / maxHealth;
+            //HPbarImage.fillAmount = Health / maxHealth;
             if (Health <= 0)
             {
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
                 Health = maxHealth;
-                HPbarImage.fillAmount = Health / maxHealth;
+                //HPbarImage.fillAmount = Health / maxHealth;
                 this.isInvincible = true;
                 Invoke("Invincibility", invincibilityTimer);
             //shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
@@ -275,7 +285,25 @@ using Photon;
                 myCurrGun++;
                 photonView.RPC("GunUpgrade", PhotonTargets.All,myCurrGun);
             }
+            if(Kills >= 5)
+        {
+            photonView.RPC("endGame", PhotonTargets.All);
         }
+        }
+
+    [PunRPC]
+        private void endGame()
+    {
+        isEndGame = true;
+        if (Kills >= 5)
+        {
+            endgameCanvas.transform.GetChild(1).gameObject.SetActive(true);
+        }
+        else
+        {
+            endgameCanvas.transform.GetChild(0).gameObject.SetActive(true);
+        }
+    }
 
         private void Effect()
         {

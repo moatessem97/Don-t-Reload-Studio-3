@@ -8,6 +8,7 @@ TagManager:
   - Ammo
   - Ground
   - Kills
+  - EndGame
   layers:
   - Default
   - TransparentFX
