@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Kills
   - EndGame
+  - cubes
   layers:
   - Default
   - TransparentFX
