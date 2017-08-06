@@ -9,12 +9,20 @@ public class PhotonConnect : Photon.PunBehaviour
     public Text myText;
     public Button Connect;
     const string VERSION = "v0.0.1";
+    RoomOptions myRoomDetails;
+    private bool isConnected = false;
+
+    public RoomInfo[] roomInformations;
     // Use this for initialization
     void Start()
     {
         PhotonNetwork.ConnectUsingSettings(VERSION);
         PhotonNetwork.automaticallySyncScene = true;
         Connect.interactable = false;
+        myRoomDetails = new RoomOptions();
+        myRoomDetails.IsVisible = true;
+        myRoomDetails.maxPlayers = 2;
+
     }
 
     // Update is called once per frame
@@ -49,5 +57,51 @@ public class PhotonConnect : Photon.PunBehaviour
             PhotonNetwork.room.IsOpen = false;
             PhotonNetwork.LoadLevel("MainScene");
         }
+
+    }
+
+   public void LobbyConnection()
+    {
+        isConnected = true;
+        //   PhotonNetwork.playerName = myusername;
+        if (PhotonNetwork.connected)
+        {
+            PhotonNetwork.JoinLobby();
+        }
+        else
+        {
+            PhotonNetwork.ConnectUsingSettings(VERSION);
+        }
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        if (isConnected)
+        {
+            // lobbymenue
+            PhotonNetwork.JoinLobby();
+        }
+    }
+
+    public void RefreshButton()
+    {
+        //textfield.text = "";
+        roomInformations = PhotonNetwork.GetRoomList();
+        for(int i = 0; i < roomInformations.Length; i++)
+        {
+            // text field . text += roominformations[i].name + "    " + rooom infrmaions[i].playercount + system.enviroment.newline
+
+        }
+
+    }
+
+    public void newConnect()
+    {
+
+    }
+
+    public void newCreateRoom()
+    {
+
     }
 }
