@@ -6,11 +6,13 @@ using UnityEngine.UI;
 public class PhotonConnect : Photon.PunBehaviour
 {
 
-    public Text myText;
+    public Text myText,LobbyText;
     public Button Connect;
     const string VERSION = "v0.0.1";
     RoomOptions myRoomDetails;
     private bool isConnected = false;
+    public Text myUsername,createOrJoinRoomText,joinRoomText;
+    public GameObject LoginCanvas, LobbyCanvas;
 
     public RoomInfo[] roomInformations;
     // Use this for initialization
@@ -19,9 +21,7 @@ public class PhotonConnect : Photon.PunBehaviour
         PhotonNetwork.ConnectUsingSettings(VERSION);
         PhotonNetwork.automaticallySyncScene = true;
         Connect.interactable = false;
-        myRoomDetails = new RoomOptions();
-        myRoomDetails.IsVisible = true;
-        myRoomDetails.maxPlayers = 2;
+        myRoomDetails = new RoomOptions() { isVisible = true, maxPlayers = 2 };
 
     }
 
@@ -45,14 +45,16 @@ public class PhotonConnect : Photon.PunBehaviour
         if (PhotonNetwork.connected)
         {
             myText.text = "Connecting to a room";
-            RoomOptions roomOptions = new RoomOptions() { IsVisible = false, MaxPlayers = 2 };
-            PhotonNetwork.JoinOrCreateRoom("Room1", roomOptions, TypedLobby.Default);
+            //RoomOptions roomOptions = new RoomOptions() { IsVisible = false, MaxPlayers = 2 };
+            PhotonNetwork.JoinOrCreateRoom(createOrJoinRoomText.text, myRoomDetails, TypedLobby.Default);
+            Debug.Log("Room Created");
+            RefreshButton();
         }
     }
 
     public override void OnPhotonPlayerConnected(PhotonPlayer newPlayer)
     {
-        if (PhotonNetwork.playerList.Length == 2 && PhotonNetwork.isMasterClient)
+        if (PhotonNetwork.playerList.Length == myRoomDetails.maxPlayers && PhotonNetwork.isMasterClient)
         {
             PhotonNetwork.room.IsOpen = false;
             PhotonNetwork.LoadLevel("MainScene");
@@ -63,10 +65,13 @@ public class PhotonConnect : Photon.PunBehaviour
    public void LobbyConnection()
     {
         isConnected = true;
-        //   PhotonNetwork.playerName = myusername;
+        PhotonNetwork.playerName = myUsername.text;
         if (PhotonNetwork.connected)
         {
             PhotonNetwork.JoinLobby();
+            myText.text = "Joined Lobby";
+            LobbyCanvas.SetActive(true);
+            LoginCanvas.SetActive(false);
         }
         else
         {
@@ -74,25 +79,25 @@ public class PhotonConnect : Photon.PunBehaviour
         }
     }
 
-    public override void OnConnectedToMaster()
-    {
-        if (isConnected)
-        {
-            // lobbymenue
-            PhotonNetwork.JoinLobby();
-        }
-    }
+    //public override void OnConnectedToMaster()
+    //{
+    //    if (isConnected)
+    //    {
+    //        // lobbymenue
+
+    //        PhotonNetwork.JoinLobby();
+    //    }
+    //}
 
     public void RefreshButton()
     {
-        //textfield.text = "";
+        LobbyText.text = "";
         roomInformations = PhotonNetwork.GetRoomList();
         for(int i = 0; i < roomInformations.Length; i++)
         {
-            // text field . text += roominformations[i].name + "    " + rooom infrmaions[i].playercount + system.enviroment.newline
-
+            LobbyText.text += roomInformations[i].Name + "  " + roomInformations[i].PlayerCount + System.Environment.NewLine;
         }
-
+        Debug.Log("refreshed");
     }
 
     public void newConnect()

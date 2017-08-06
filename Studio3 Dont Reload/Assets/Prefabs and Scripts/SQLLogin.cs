@@ -77,7 +77,8 @@ public class SQLLogin : MonoBehaviour
             {
                 // WHAT HAPPENS WHEN THE PLAYER LOGS IN
                 Debug.Log("shizlogged");
-                canvas.GetComponent<PhotonConnect>().ConnectToRoom();
+                //canvas.GetComponent<PhotonConnect>().ConnectToRoom();
+                canvas.GetComponent<PhotonConnect>().LobbyConnection();
             }
             else
                 messageText.text = _w.text;    //THE PHP SCRIPT SUPPLIED WILL TELL THE PLAYER IF THEIR PASSWORD IS INCORRECT, OR IF THEIR USERNAME DOESN'T EXIST
