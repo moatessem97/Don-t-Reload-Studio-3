@@ -48,8 +48,10 @@ using Photon;
         private myNetworkManager NetworkManager;
 
         [SerializeField]
-        private GameObject[] players;
+        private GameObject[] players, gunPictures;
         public int[] playerIDs;
+        [SerializeField]
+        private GameObject gunPictures1, gunPictures2, gunPictures3, gunPictures4;
 
         private void Awake()
         {
@@ -73,7 +75,7 @@ using Photon;
             myCurrGun = 0;
             playerIDs = new int[2];
             reloadTimer = 1.5f;
-
+            gunPictures = new GameObject[4];
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
             NetworkManager = FindObjectOfType<myNetworkManager>();
@@ -83,11 +85,18 @@ using Photon;
                 Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
                 AmmoText = GameObject.FindGameObjectWithTag("Ammo").GetComponent<Text>();
                 KillText = GameObject.FindGameObjectWithTag("Kills").GetComponent<Text>();
+                gunPictures1 = GameObject.FindGameObjectWithTag("gunImage1");
+                gunPictures2 = GameObject.FindGameObjectWithTag("gunImage2");
+                gunPictures3 = GameObject.FindGameObjectWithTag("gunImage3");
+                gunPictures4 = GameObject.FindGameObjectWithTag("gunImage4");
+                //gunPictures = GameObject.FindGameObjectsWithTag("gunImage1");
                 maxAmmo = 35;
                 Ammo = maxAmmo;
                 AmmoText.text = Ammo.ToString();
                 Invoke("GettingPlayers", 1f);
                 Invoke("GettingIDs", 1.2f);
+
+                gunPictures1.transform.GetChild(0).gameObject.SetActive(false);
             }
 
         }
@@ -332,6 +341,10 @@ using Photon;
         [PunRPC]
         private void GunUpgrade(int CurrentGun)
         {
+        //for (int i = 0; i < 3; i++)
+        //{
+        //    gunPictures[i].transform.GetChild(0).gameObject.SetActive(true);
+        //}
             myGunRenderer.sprite = Guns[CurrentGun];
             if (CurrentGun == 0)
             {
@@ -339,21 +352,28 @@ using Photon;
                 this.fireRate = 5f;
                 this.maxAmmo = 35;
                 this.Ammo = maxAmmo;
-            }
+                gunPictures1.transform.GetChild(0).gameObject.SetActive(false);
+                gunPictures2.transform.GetChild(0).gameObject.SetActive(true);
+        }
             if (CurrentGun == 1)
             {
                 this.Damage = 4;
                 this.fireRate = 14f;
                 this.maxAmmo = 100;
                 this.Ammo = maxAmmo;
-            }
+                gunPictures2.transform.GetChild(0).gameObject.SetActive(false);
+                gunPictures1.transform.GetChild(0).gameObject.SetActive(true);
+                gunPictures3.transform.GetChild(0).gameObject.SetActive(true);
+        }
             if (CurrentGun == 2)
             {
                 this.Damage = 30;
                 this.fireRate = 1f;
                 this.maxAmmo = 5;
                 this.Ammo = maxAmmo;
-            }
+                gunPictures3.transform.GetChild(0).gameObject.SetActive(false);
+                gunPictures2.transform.GetChild(0).gameObject.SetActive(true);
+        }
 
         }
 
@@ -387,5 +407,5 @@ using Photon;
                 this.isInvincible = (bool)stream.ReceiveNext();
             }
         }
-    }
+ }
 

@@ -10,6 +10,10 @@ TagManager:
   - Kills
   - EndGame
   - cubes
+  - gunImage1
+  - gunImage2
+  - gunImage3
+  - gunImage4
   layers:
   - Default
   - TransparentFX
