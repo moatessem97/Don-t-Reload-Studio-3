@@ -13,7 +13,7 @@ public class AudioVisualiser : MonoBehaviour {
 
 		for (int i = 0; i < numberofObjects; i++) {
 			float angle = i * Mathf.PI * 2 / numberofObjects;
-			Vector3 pos = new Vector3(Mathf.Cos (angle), 0, Mathf.Sin (angle)) * radius;
+			Vector3 pos = new Vector3(Mathf.Sin (angle), 0, Mathf.Cos (angle)) * radius;
 			Instantiate (prefab, pos, Quaternion.identity);
 
 		}
