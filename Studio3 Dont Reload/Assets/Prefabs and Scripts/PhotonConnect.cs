@@ -64,7 +64,6 @@ public class PhotonConnect : Photon.PunBehaviour
 
    public void LobbyConnection()
     {
-        isConnected = true;
         PhotonNetwork.playerName = myUsername.text;
         if (PhotonNetwork.connected)
         {
@@ -79,34 +78,14 @@ public class PhotonConnect : Photon.PunBehaviour
         }
     }
 
-    //public override void OnConnectedToMaster()
-    //{
-    //    if (isConnected)
-    //    {
-    //        // lobbymenue
-
-    //        PhotonNetwork.JoinLobby();
-    //    }
-    //}
-
     public void RefreshButton()
     {
         LobbyText.text = "";
         roomInformations = PhotonNetwork.GetRoomList();
         for(int i = 0; i < roomInformations.Length; i++)
         {
-            LobbyText.text += roomInformations[i].Name + "  " + roomInformations[i].PlayerCount + System.Environment.NewLine;
+            LobbyText.text += roomInformations[i].Name + "          " + roomInformations[i].PlayerCount + System.Environment.NewLine;
         }
         Debug.Log("refreshed");
-    }
-
-    public void newConnect()
-    {
-
-    }
-
-    public void newCreateRoom()
-    {
-
     }
 }

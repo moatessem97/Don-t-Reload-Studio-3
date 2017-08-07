@@ -7,14 +7,8 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance = new AudioManager();
     public AudioSource backgroundAudioSource;
-    public List<AudioClip>  backgroundMusic;
-    public AudioMixer myMixer;
-    public AudioMixerSnapshot main, muted, bgMuted;
-
-    public bool isMuted;
-    public bool isBGMuted;
-
-    #region Instance and things
+    public List<AudioClip> backgroundMusic;
+     #region Instance and things
 
     static AudioManager()
     {
@@ -53,8 +47,7 @@ public class AudioManager : MonoBehaviour
 
     void Update()
     {
-        if(!isMuted || !isBGMuted)
-            GrowAudio();
+        GrowAudio();
 
         if (!backgroundAudioSource.isPlaying)
         {
@@ -62,9 +55,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    
 
-   
+
+
 
     public void PlayRandomVolWithSrc(AudioClip audioToBePlayed, AudioSource audioSrcToBeUsed)
     {
@@ -88,33 +81,6 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Mute()
-    {
-        if (this.isMuted)
-        {
-            this.isMuted = false;
-            main.TransitionTo(0.5f);
-        }
-        else
-        {
-            this.isMuted = true;
-            muted.TransitionTo(0.5f);
-        }
-    }
+  }
 
-    
-
-    public void MuteBG()
-    {
-        if (this.isBGMuted)
-        {
-            this.isBGMuted = false;
-            main.TransitionTo(0.5f);
-        }
-        else
-        {
-            this.isBGMuted = true;
-            bgMuted.TransitionTo(0.5f);
-        }
-    }
-}
+   
