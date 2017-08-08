@@ -15,6 +15,8 @@ using Photon;
         // Arm rotation Stuff
         public int rotationOffset = 0;
         private GameObject arm,endgameCanvas;
+        public AudioClip JumpAud,DeathAud,Shoot1,Shoot2,Shoot3;
+        private AudioSource myAudioSource;
 
         //Weapon Stuff
         public float fireRate = 0f;
@@ -79,6 +81,7 @@ using Photon;
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
             NetworkManager = FindObjectOfType<myNetworkManager>();
+            myAudioSource = gameObject.GetComponent<AudioSource>();
             if (photonView.isMine)
             {
                 this.myID = PhotonNetwork.player.ID;
@@ -249,7 +252,7 @@ using Photon;
             Health -= enemyDamage;
             //HPbarImage.fillAmount = Health / maxHealth;
             if (Health <= 0)
-            {
+            { 
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
                 Health = maxHealth;
                 //HPbarImage.fillAmount = Health / maxHealth;
@@ -270,6 +273,7 @@ using Photon;
                 if (photonView.isMine)
                 {
                     Deaths++;
+                    myAudioSource.PlayOneShot(DeathAud);
                     Score.text = Deaths.ToString();
                     if (myCurrGun > 0)
                     {
