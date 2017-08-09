@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 1f3b625db512b6643b844389252abac9
+timeCreated: 1502285822
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Veneer Extras
+  fontNames:
+  - Veneer Extras
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

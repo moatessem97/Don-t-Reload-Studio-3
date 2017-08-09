@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 827a0d1f9885c0a4a9f0d403f2ae788d
+timeCreated: 1492084996
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Komika Text Tight
+  fontNames:
+  - Komika Text Tight
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4b5fe2258385c2f4f94ecbf4457fe3cd, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
