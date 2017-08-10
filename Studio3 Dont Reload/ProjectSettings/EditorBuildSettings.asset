@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Menu.unity
     guid: afea0b751dfc0674396fb50761c8ba51
   - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 00000000000000000000000000000000
+  - enabled: 1
     path: Assets/Scenes/PhotonConnectScene.unity
     guid: 6f9b4c8ff5f1b6f4a9bdbb2326808b2c
   - enabled: 1
@@ -28,4 +31,4 @@ EditorBuildSettings:
     guid: be7b13912e1240e4a8e03a9d08c217c5
   - enabled: 1
     path: Assets/Scenes/Credits.unity
-    guid: 00000000000000000000000000000000
+    guid: ee012e2b7c60d4e4eb2b97865dc86884
