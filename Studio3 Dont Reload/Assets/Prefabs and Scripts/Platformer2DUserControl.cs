@@ -294,7 +294,7 @@ using Photon;
                 myCurrGun++;
                 photonView.RPC("GunUpgrade", PhotonTargets.All,myCurrGun);
             }
-            if(Kills >= 5)
+            if(Kills >= 15)
         {
             photonView.RPC("endGame", PhotonTargets.All);
         }
@@ -304,7 +304,7 @@ using Photon;
         private void endGame()
     {
         isEndGame = true;
-        if (Kills >= 5)
+        if (Kills >= 15)
         {
             endgameCanvas.transform.GetChild(1).gameObject.SetActive(true);
         }

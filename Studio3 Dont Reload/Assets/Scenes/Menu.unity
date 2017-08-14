@@ -250,9 +250,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.97794116, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9117647, g: 0.08044985, b: 0.13204868, a: 1}
+    m_PressedColor: {r: 0.006271632, g: 0.7478374, b: 0.85294116, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -780,9 +780,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.97794116, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9117647, g: 0.08044985, b: 0.13204868, a: 1}
+    m_PressedColor: {r: 0.006271632, g: 0.7478374, b: 0.85294116, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1131,6 +1131,36 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 2.4752436
       objectReference: {fileID: 0}
+    - target: {fileID: 114649487685255296, guid: dc801f9d13b52724185c88c669cf0a9e,
+        type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.r
+      value: 0.83823526
+      objectReference: {fileID: 0}
+    - target: {fileID: 114649487685255296, guid: dc801f9d13b52724185c88c669cf0a9e,
+        type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.g
+      value: 0.12943341
+      objectReference: {fileID: 0}
+    - target: {fileID: 114649487685255296, guid: dc801f9d13b52724185c88c669cf0a9e,
+        type: 2}
+      propertyPath: m_Colors.m_HighlightedColor.b
+      value: 0.12943341
+      objectReference: {fileID: 0}
+    - target: {fileID: 114649487685255296, guid: dc801f9d13b52724185c88c669cf0a9e,
+        type: 2}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.056228355
+      objectReference: {fileID: 0}
+    - target: {fileID: 114649487685255296, guid: dc801f9d13b52724185c88c669cf0a9e,
+        type: 2}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.58823526
+      objectReference: {fileID: 0}
+    - target: {fileID: 114649487685255296, guid: dc801f9d13b52724185c88c669cf0a9e,
+        type: 2}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.3240663
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 114981907083796896, guid: dc801f9d13b52724185c88c669cf0a9e, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: dc801f9d13b52724185c88c669cf0a9e, type: 2}
@@ -1194,9 +1224,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0.97794116, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9117647, g: 0.08044985, b: 0.13204868, a: 1}
+    m_PressedColor: {r: 0.006271632, g: 0.7478374, b: 0.85294116, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
@@ -1313,7 +1343,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1558202391}
   - component: {fileID: 1558202390}
-  - component: {fileID: 1558202392}
   - component: {fileID: 1558202393}
   m_Layer: 0
   m_Name: Music Player
@@ -1353,21 +1382,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1558202392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1558202389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cafe059495b282f499da79fd3a39efa9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefab: {fileID: 1112605273893240, guid: 08c1fc21388bd6f429da492a607f4f83, type: 2}
-  numberofObjects: 20
-  radius: 5
-  cubes: []
 --- !u!82 &1558202393
 AudioSource:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: afea0b751dfc0674396fb50761c8ba51
   - enabled: 1
     path: Assets/Scenes/Tutorial.unity
-    guid: 00000000000000000000000000000000
+    guid: ddf2944b06b49af4cbd9dc14f098b438
   - enabled: 1
     path: Assets/Scenes/PhotonConnectScene.unity
     guid: 6f9b4c8ff5f1b6f4a9bdbb2326808b2c
@@ -24,10 +24,10 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: 073122771270c428ba29748457e1dd1b
   - enabled: 1
-    path: Assets/Scenes/Map 2.unity
+    path: Assets/Scenes/Map2.unity
     guid: 9b2d98c411300944a85f390692ab8d8e
   - enabled: 1
-    path: Assets/Scenes/Map 3.unity
+    path: Assets/Scenes/Map3.unity
     guid: be7b13912e1240e4a8e03a9d08c217c5
   - enabled: 1
     path: Assets/Scenes/Credits.unity
