@@ -88,7 +88,7 @@ using Photon;
                 gunPictures1 = GameObject.FindGameObjectWithTag("gunImage1");
                 gunPictures2 = GameObject.FindGameObjectWithTag("gunImage2");
                 gunPictures3 = GameObject.FindGameObjectWithTag("gunImage3");
-                gunPictures4 = GameObject.FindGameObjectWithTag("gunImage4");
+                //gunPictures4 = GameObject.FindGameObjectWithTag("gunImage4");
                 //gunPictures = GameObject.FindGameObjectsWithTag("gunImage1");
                 maxAmmo = 35;
                 Ammo = maxAmmo;

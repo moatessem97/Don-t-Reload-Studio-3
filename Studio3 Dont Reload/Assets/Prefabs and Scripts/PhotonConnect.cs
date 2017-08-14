@@ -14,10 +14,16 @@ public class PhotonConnect : Photon.PunBehaviour
     public Text myUsername,createOrJoinRoomText,joinRoomText;
     public GameObject LoginCanvas, LobbyCanvas;
 
+    public string Level1, Level2, Level3, CurrLevel;
+
     public RoomInfo[] roomInformations;
     // Use this for initialization
     void Start()
     {
+        Level1 = "MainScene";
+        Level2 = "Map2";
+        Level3 = "Map3";
+        CurrLevel = Level1;
         PhotonNetwork.ConnectUsingSettings(VERSION);
         PhotonNetwork.automaticallySyncScene = true;
         Connect.interactable = false;
@@ -49,6 +55,7 @@ public class PhotonConnect : Photon.PunBehaviour
             PhotonNetwork.JoinOrCreateRoom(createOrJoinRoomText.text, myRoomDetails, TypedLobby.Default);
             Debug.Log("Room Created");
             RefreshButton();
+
         }
     }
 
@@ -57,7 +64,7 @@ public class PhotonConnect : Photon.PunBehaviour
         if (PhotonNetwork.playerList.Length == myRoomDetails.maxPlayers && PhotonNetwork.isMasterClient)
         {
             PhotonNetwork.room.IsOpen = false;
-            PhotonNetwork.LoadLevel("MainScene");
+            PhotonNetwork.LoadLevel(CurrLevel);
         }
 
     }
@@ -88,4 +95,18 @@ public class PhotonConnect : Photon.PunBehaviour
         }
         Debug.Log("refreshed");
     }
+
+    public void LevelOne()
+    {
+        CurrLevel = Level1;
+    }
+    public void LevelTwo()
+    {
+        CurrLevel = Level2;
+    }
+    public void LevelThree()
+    {
+        CurrLevel = Level3;
+    }
+
 }
