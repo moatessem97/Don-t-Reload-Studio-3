@@ -20,7 +20,7 @@ using Photon;
         public float fireRate = 0f;
         public int Damage = 10;
         public LayerMask whatToHit;
-        public Transform BulletTrailPrefab;
+        public Transform BulletTrailPrefab,BulletTrailPrefab2,BulletTrailPrefab3,CurrBulletPrefab;
         public float effectSpawnRate = 10f;
         public Transform MuzzleFlashPrefab;
         public Text Score, AmmoText, KillText;
@@ -32,6 +32,8 @@ using Photon;
         private float timeToFire = 0;
         private Transform firePoint;
         private float timeToSpawnEffect = 0f;
+
+        private GameObject myManager;
 
         //public Sprite myDefaultGun,Gun2,Gun3;
         public Sprite[] Guns;
@@ -79,6 +81,8 @@ using Photon;
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
             NetworkManager = FindObjectOfType<myNetworkManager>();
+
+            CurrBulletPrefab = BulletTrailPrefab;
             if (photonView.isMine)
             {
                 this.myID = PhotonNetwork.player.ID;
@@ -96,7 +100,10 @@ using Photon;
                 Invoke("GettingPlayers", 1f);
                 Invoke("GettingIDs", 1.2f);
 
+                myManager = GameObject.FindGameObjectWithTag("Manager");
+
                 gunPictures1.transform.GetChild(0).gameObject.SetActive(false);
+
             }
 
         }
@@ -312,11 +319,14 @@ using Photon;
         {
             endgameCanvas.transform.GetChild(0).gameObject.SetActive(true);
         }
+
+        Invoke("PartOfEndGame", 3f);
+
     }
 
         private void Effect()
         {
-            Instantiate(this.BulletTrailPrefab, this.firePoint.position, firePoint.rotation);
+            Instantiate(this.CurrBulletPrefab, this.firePoint.position, firePoint.rotation);
             Transform clone = (Transform)Instantiate(this.MuzzleFlashPrefab, this.firePoint.position, firePoint.rotation);
             clone.parent = this.firePoint;
             float size = UnityEngine.Random.Range(0.6f, 0.9f);
@@ -352,6 +362,7 @@ using Photon;
                 this.fireRate = 5f;
                 this.maxAmmo = 35;
                 this.Ammo = maxAmmo;
+                CurrBulletPrefab = BulletTrailPrefab;
                 gunPictures1.transform.GetChild(0).gameObject.SetActive(false);
                 gunPictures2.transform.GetChild(0).gameObject.SetActive(true);
         }
@@ -361,6 +372,7 @@ using Photon;
                 this.fireRate = 14f;
                 this.maxAmmo = 100;
                 this.Ammo = maxAmmo;
+                CurrBulletPrefab = BulletTrailPrefab2;
                 gunPictures2.transform.GetChild(0).gameObject.SetActive(false);
                 gunPictures1.transform.GetChild(0).gameObject.SetActive(true);
                 gunPictures3.transform.GetChild(0).gameObject.SetActive(true);
@@ -371,6 +383,7 @@ using Photon;
                 this.fireRate = 1f;
                 this.maxAmmo = 5;
                 this.Ammo = maxAmmo;
+                CurrBulletPrefab = BulletTrailPrefab3;
                 gunPictures3.transform.GetChild(0).gameObject.SetActive(false);
                 gunPictures2.transform.GetChild(0).gameObject.SetActive(true);
         }
@@ -380,6 +393,11 @@ using Photon;
         private void Invincibility()
     {
         isInvincible = false;
+    }
+
+        private void PartOfEndGame()
+    {
+        myManager.GetComponent<myNetworkManager>().menuButton();
     }
 
 

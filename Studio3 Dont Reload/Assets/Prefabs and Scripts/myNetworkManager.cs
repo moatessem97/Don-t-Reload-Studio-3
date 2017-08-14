@@ -36,7 +36,7 @@ public class myNetworkManager : PunBehaviour
         PhotonNetwork.LoadLevel(1);
     }
 
-    private void OnLeaveRoom()
+    public void OnLeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
     }

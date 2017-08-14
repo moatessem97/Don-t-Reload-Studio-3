@@ -14,6 +14,7 @@ TagManager:
   - gunImage2
   - gunImage3
   - gunImage4
+  - Manager
   layers:
   - Default
   - TransparentFX

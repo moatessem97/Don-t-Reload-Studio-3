@@ -375,6 +375,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294966779
   BulletTrailPrefab: {fileID: 422280, guid: ff6d998de2a4b4a58ba2b4dfe924e7a3, type: 2}
+  BulletTrailPrefab2: {fileID: 422280, guid: 64b2c863b928bdb4a8bb4b6e93c6d2b7, type: 2}
+  BulletTrailPrefab3: {fileID: 422280, guid: e375d00b8e79a7d40a74c3c644983c94, type: 2}
+  CurrBulletPrefab: {fileID: 0}
   effectSpawnRate: 10
   MuzzleFlashPrefab: {fileID: 409904, guid: 3039ed71d59d74128b0544b37dd8d672, type: 2}
   Score: {fileID: 0}
@@ -386,6 +389,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0ab90a1e6fd62904f86cbca613f2c1d6, type: 3}
   Health: 60
   maxHealth: 60
+  reloadTimer: 0
+  invincibilityTimer: 0
   Ammo: 0
   Deaths: 0
   maxAmmo: 0
@@ -394,7 +399,12 @@ MonoBehaviour:
   myCurrGun: 0
   ArmTransform: {x: 0, y: 0, z: 0, w: 0}
   players: []
+  gunPictures: []
   playerIDs: 
+  gunPictures1: {fileID: 0}
+  gunPictures2: {fileID: 0}
+  gunPictures3: {fileID: 0}
+  gunPictures4: {fileID: 0}
 --- !u!114 &114160183407859540
 MonoBehaviour:
   m_ObjectHideFlags: 1
