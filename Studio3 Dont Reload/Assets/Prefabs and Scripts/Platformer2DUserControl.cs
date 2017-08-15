@@ -55,7 +55,7 @@ using Photon;
         [SerializeField]
         private GameObject gunPictures1, gunPictures2, gunPictures3, gunPictures4;
 
-        private AudioSource myAudioSource;
+        public AudioSource myAudioSource;
         private AudioClip myCurrGunSound;
         public AudioClip[] mySounds;
 
@@ -103,8 +103,8 @@ using Photon;
                 maxAmmo = 35;
                 Ammo = maxAmmo;
                 AmmoText.text = Ammo.ToString();
-                Invoke("GettingPlayers", 1f);
-                Invoke("GettingIDs", 1.2f);
+                Invoke("GettingPlayers", 3f);
+                Invoke("GettingIDs", 4f);
 
                 myManager = GameObject.FindGameObjectWithTag("Manager");
 
