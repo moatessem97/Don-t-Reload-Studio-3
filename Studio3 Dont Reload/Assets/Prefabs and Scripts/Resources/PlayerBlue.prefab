@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 114349174755416296}
   - component: {fileID: 114338026256811648}
   - component: {fileID: 114566631842948242}
+  - component: {fileID: 82569644690369354}
   m_Layer: 8
   m_Name: PlayerBlue
   m_TagString: Player
@@ -339,6 +340,86 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.68}
   m_EdgeRadius: 0
+--- !u!82 &82569644690369354
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1524682584045994}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95336124672315948
 Animator:
   serializedVersion: 3
@@ -505,6 +586,11 @@ MonoBehaviour:
   gunPictures2: {fileID: 0}
   gunPictures3: {fileID: 0}
   gunPictures4: {fileID: 0}
+  mySounds:
+  - {fileID: 8300000, guid: ca5a7ed246a1294409814ab9d2cb9420, type: 3}
+  - {fileID: 8300000, guid: 94dcc91613fc2f14981871913f84db94, type: 3}
+  - {fileID: 8300000, guid: 2a57b2b8432d57e4c8c5da3043a1250a, type: 3}
+  - {fileID: 8300000, guid: 1611312466a88484da0215662d029eb3, type: 3}
 --- !u!114 &114349174755416296
 MonoBehaviour:
   m_ObjectHideFlags: 1

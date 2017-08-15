@@ -55,6 +55,10 @@ using Photon;
         [SerializeField]
         private GameObject gunPictures1, gunPictures2, gunPictures3, gunPictures4;
 
+        private AudioSource myAudioSource;
+        private AudioClip myCurrGunSound;
+        public AudioClip[] mySounds;
+
         private void Awake()
         {
             m_Character = GetComponent<PlatformerCharacter2D>();
@@ -82,6 +86,8 @@ using Photon;
             HPbarImage.fillAmount = Health / maxHealth;
             NetworkManager = FindObjectOfType<myNetworkManager>();
 
+            myAudioSource = gameObject.GetComponent<AudioSource>();
+            myCurrGunSound = mySounds[1];
             CurrBulletPrefab = BulletTrailPrefab;
             if (photonView.isMine)
             {
@@ -326,6 +332,7 @@ using Photon;
 
         private void Effect()
         {
+            myAudioSource.PlayOneShot(myCurrGunSound);
             Instantiate(this.CurrBulletPrefab, this.firePoint.position, firePoint.rotation);
             Transform clone = (Transform)Instantiate(this.MuzzleFlashPrefab, this.firePoint.position, firePoint.rotation);
             clone.parent = this.firePoint;
@@ -362,7 +369,8 @@ using Photon;
                 this.fireRate = 5f;
                 this.maxAmmo = 35;
                 this.Ammo = maxAmmo;
-                CurrBulletPrefab = BulletTrailPrefab;
+                this.CurrBulletPrefab = BulletTrailPrefab;
+                this.myCurrGunSound = mySounds[1];
                 gunPictures1.transform.GetChild(0).gameObject.SetActive(false);
                 gunPictures2.transform.GetChild(0).gameObject.SetActive(true);
         }
@@ -372,7 +380,8 @@ using Photon;
                 this.fireRate = 14f;
                 this.maxAmmo = 100;
                 this.Ammo = maxAmmo;
-                CurrBulletPrefab = BulletTrailPrefab2;
+                this.CurrBulletPrefab = BulletTrailPrefab2;
+                this.myCurrGunSound = mySounds[2];
                 gunPictures2.transform.GetChild(0).gameObject.SetActive(false);
                 gunPictures1.transform.GetChild(0).gameObject.SetActive(true);
                 gunPictures3.transform.GetChild(0).gameObject.SetActive(true);
@@ -383,7 +392,8 @@ using Photon;
                 this.fireRate = 1f;
                 this.maxAmmo = 5;
                 this.Ammo = maxAmmo;
-                CurrBulletPrefab = BulletTrailPrefab3;
+                this.CurrBulletPrefab = BulletTrailPrefab3;
+                this.myCurrGunSound = mySounds[3];
                 gunPictures3.transform.GetChild(0).gameObject.SetActive(false);
                 gunPictures2.transform.GetChild(0).gameObject.SetActive(true);
         }

@@ -405,6 +405,11 @@ MonoBehaviour:
   gunPictures2: {fileID: 0}
   gunPictures3: {fileID: 0}
   gunPictures4: {fileID: 0}
+  mySounds:
+  - {fileID: 8300000, guid: ca5a7ed246a1294409814ab9d2cb9420, type: 3}
+  - {fileID: 8300000, guid: 94dcc91613fc2f14981871913f84db94, type: 3}
+  - {fileID: 8300000, guid: 2a57b2b8432d57e4c8c5da3043a1250a, type: 3}
+  - {fileID: 8300000, guid: 1611312466a88484da0215662d029eb3, type: 3}
 --- !u!114 &114160183407859540
 MonoBehaviour:
   m_ObjectHideFlags: 1
