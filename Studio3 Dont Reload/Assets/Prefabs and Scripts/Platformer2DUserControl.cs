@@ -79,13 +79,13 @@ using Photon;
         private void Start()
         {
             myCurrGun = 0;
-            playerIDs = new int[2];
+            playerIDs = new int[4];
             reloadTimer = 1.5f;
             gunPictures = new GameObject[4];
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
             NetworkManager = FindObjectOfType<myNetworkManager>();
-
+            players = new GameObject[4];
             myAudioSource = gameObject.GetComponent<AudioSource>();
             myCurrGunSound = mySounds[1];
             CurrBulletPrefab = BulletTrailPrefab;
@@ -98,6 +98,8 @@ using Photon;
                 gunPictures1 = GameObject.FindGameObjectWithTag("gunImage1");
                 gunPictures2 = GameObject.FindGameObjectWithTag("gunImage2");
                 gunPictures3 = GameObject.FindGameObjectWithTag("gunImage3");
+                this.isInvincible = true;
+                Invoke("Invincibility", invincibilityTimer);
                 //gunPictures4 = GameObject.FindGameObjectWithTag("gunImage4");
                 //gunPictures = GameObject.FindGameObjectsWithTag("gunImage1");
                 maxAmmo = 35;
@@ -254,7 +256,7 @@ using Photon;
         {
             if(isInvincible == true)
         {
-            Debug.Log("Target is invincible for ");
+            //Debug.Log("Target is invincible for ");
             return;
         }
             //players = GameObject.FindObjectsOfType<Platformer2DUserControl>();
@@ -266,9 +268,10 @@ using Photon;
                 transform.position = NetworkManager.spawns[PhotonNetwork.player.ID - 1].transform.position;
                 Health = maxHealth;
                 //HPbarImage.fillAmount = Health / maxHealth;
+                myAudioSource.PlayOneShot(mySounds[0]);
                 this.isInvincible = true;
                 Invoke("Invincibility", invincibilityTimer);
-            //shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
+                //shooterController.photonView.RPC("GotAKill", PhotonTargets.All);
             if (enemyID != 30)
            {
                 //if enemy ID is 30 it'll be the enviroment that'll be killing the player
@@ -319,11 +322,11 @@ using Photon;
         isEndGame = true;
         if (Kills >= 15)
         {
-            endgameCanvas.transform.GetChild(1).gameObject.SetActive(true);
+            endgameCanvas.transform.GetChild(0).gameObject.SetActive(true);
         }
         else
         {
-            endgameCanvas.transform.GetChild(0).gameObject.SetActive(true);
+            endgameCanvas.transform.GetChild(1).gameObject.SetActive(true);
         }
 
         Invoke("PartOfEndGame", 3f);
