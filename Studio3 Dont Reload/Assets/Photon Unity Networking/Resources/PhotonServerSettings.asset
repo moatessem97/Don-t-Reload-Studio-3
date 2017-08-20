@@ -48,4 +48,5 @@ MonoBehaviour:
   - GotAKill
   - GunUpgrade
   - endGame
+  - GettingPlayers
   DisableAutoOpenWizard: 1

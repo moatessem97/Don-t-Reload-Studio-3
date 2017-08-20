@@ -581,11 +581,11 @@ MonoBehaviour:
   ArmTransform: {x: 0, y: 0, z: 0, w: 0}
   players: []
   gunPictures: []
-  playerIDs: 
   gunPictures1: {fileID: 0}
   gunPictures2: {fileID: 0}
   gunPictures3: {fileID: 0}
   gunPictures4: {fileID: 0}
+  myAudioSource: {fileID: 0}
   mySounds:
   - {fileID: 8300000, guid: ca5a7ed246a1294409814ab9d2cb9420, type: 3}
   - {fileID: 8300000, guid: 94dcc91613fc2f14981871913f84db94, type: 3}

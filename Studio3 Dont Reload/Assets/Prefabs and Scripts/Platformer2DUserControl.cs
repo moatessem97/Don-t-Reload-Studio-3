@@ -51,7 +51,7 @@ using Photon;
 
         [SerializeField]
         private GameObject[] players, gunPictures;
-        public int[] playerIDs;
+        private int[] playerIDs;
         [SerializeField]
         private GameObject gunPictures1, gunPictures2, gunPictures3, gunPictures4;
 
@@ -79,19 +79,19 @@ using Photon;
         private void Start()
         {
             myCurrGun = 0;
-            playerIDs = new int[4];
+            playerIDs = new int[2];
             reloadTimer = 1.5f;
             gunPictures = new GameObject[4];
             maxHealth = Health;
             HPbarImage.fillAmount = Health / maxHealth;
             NetworkManager = FindObjectOfType<myNetworkManager>();
-            players = new GameObject[4];
+            players = new GameObject[2];
             myAudioSource = gameObject.GetComponent<AudioSource>();
             myCurrGunSound = mySounds[1];
             CurrBulletPrefab = BulletTrailPrefab;
+            //photonView.RPC("GettingPlayers", PhotonTargets.All);
 
-
-            if (photonView.isMine)
+        if (photonView.isMine)
             {
                 this.myID = PhotonNetwork.player.ID;
                 Score = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
@@ -107,9 +107,9 @@ using Photon;
                 maxAmmo = 35;
                 Ammo = maxAmmo;
                 AmmoText.text = Ammo.ToString();
-            //Invoke("GettingPlayers", 3f);
-            //Invoke("GettingIDs", 4f);
-                photonView.RPC("GettingPlayers", PhotonTargets.All);
+                Invoke("GettingPlayers", 3f);
+                Invoke("GettingIDs", 4f);
+
                 myManager = GameObject.FindGameObjectWithTag("Manager");
 
                 gunPictures1.transform.GetChild(0).gameObject.SetActive(false);

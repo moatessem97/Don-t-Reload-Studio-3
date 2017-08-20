@@ -27,7 +27,7 @@ public class PhotonConnect : Photon.PunBehaviour
         PhotonNetwork.ConnectUsingSettings(VERSION);
         PhotonNetwork.automaticallySyncScene = true;
         Connect.interactable = false;
-        myRoomDetails = new RoomOptions() { isVisible = true, maxPlayers = 4 };
+        myRoomDetails = new RoomOptions() { isVisible = true, maxPlayers = 2 };
 
     }
 
