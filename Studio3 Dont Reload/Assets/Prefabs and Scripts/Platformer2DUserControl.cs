@@ -89,6 +89,8 @@ using Photon;
             myAudioSource = gameObject.GetComponent<AudioSource>();
             myCurrGunSound = mySounds[1];
             CurrBulletPrefab = BulletTrailPrefab;
+
+
             if (photonView.isMine)
             {
                 this.myID = PhotonNetwork.player.ID;
@@ -105,9 +107,9 @@ using Photon;
                 maxAmmo = 35;
                 Ammo = maxAmmo;
                 AmmoText.text = Ammo.ToString();
-                Invoke("GettingPlayers", 3f);
-                Invoke("GettingIDs", 4f);
-
+            //Invoke("GettingPlayers", 3f);
+            //Invoke("GettingIDs", 4f);
+                photonView.RPC("GettingPlayers", PhotonTargets.All);
                 myManager = GameObject.FindGameObjectWithTag("Manager");
 
                 gunPictures1.transform.GetChild(0).gameObject.SetActive(false);
@@ -353,9 +355,11 @@ using Photon;
             }
         }
 
+    [PunRPC]
         private void GettingPlayers()
         {
             players = GameObject.FindGameObjectsWithTag("Player");
+            GettingIDs();
         }
 
         [PunRPC]
